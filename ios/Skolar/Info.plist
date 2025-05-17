@@ -26,14 +26,13 @@
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
-	  <!-- Do not change NSAllowsArbitraryLoads to true, or you will risk app rejection! -->
 		<key>NSAllowsArbitraryLoads</key>
 		<false/>
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -48,5 +47,27 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Futura-CondensedLight.otf</string>
+		<string>Futura Bold Italic font.ttf</string>
+		<string>Futura Bold font.ttf</string>
+		<string>Futura Book Italic font.ttf</string>
+		<string>Futura Book font.ttf</string>
+		<string>Futura Extra Black font.ttf</string>
+		<string>Futura Heavy Italic font.ttf</string>
+		<string>Futura Heavy font.ttf</string>
+		<string>Futura Light Italic font.ttf</string>
+		<string>Futura Light font.ttf</string>
+		<string>Futura Medium Italic font.ttf</string>
+		<string>Futura XBlk BT.ttf</string>
+		<string>futur.ttf</string>
+		<string>futura light bt.ttf</string>
+		<string>futura medium bt.ttf</string>
+		<string>futura medium condensed bt.ttf</string>
+		<string>tt0205m_.ttf</string>
+		<string>unicode.futurab.ttf</string>
+		<string>unicode.futurabb.ttf</string>
+	</array>
 </dict>
 </plist>
