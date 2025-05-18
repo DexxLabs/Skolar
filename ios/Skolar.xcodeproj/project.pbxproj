@@ -31,6 +31,8 @@
 		05FB9FD6930A4559AF5DA443 /* unicode.futurab.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DAE5EDE6694046C48E8AAAAF /* unicode.futurab.ttf */; };
 		09D979B3E3094A508B6B0BF2 /* unicode.futurabb.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 86240B7383C7489E9E394196 /* unicode.futurabb.ttf */; };
 		02A6A81456FF4964B84BE4B6 /* sharefonts.net.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8380636A7B964FA481E99156 /* sharefonts.net.txt */; };
+		EED9A019C470469398C2C9B4 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2760187025F34B4A96717C2F /* BootSplash.storyboard */; };
+		F85C9E30A9434959AC98C479 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB7828DB209A4B4FA3313252 /* Colors.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +77,8 @@
 		DAE5EDE6694046C48E8AAAAF /* unicode.futurab.ttf */ = {isa = PBXFileReference; name = "unicode.futurab.ttf"; path = "../src/assets/fonts/unicode.futurab.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		86240B7383C7489E9E394196 /* unicode.futurabb.ttf */ = {isa = PBXFileReference; name = "unicode.futurabb.ttf"; path = "../src/assets/fonts/unicode.futurabb.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		8380636A7B964FA481E99156 /* sharefonts.net.txt */ = {isa = PBXFileReference; name = "sharefonts.net.txt"; path = "../src/assets/fonts/sharefonts.net.txt"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2760187025F34B4A96717C2F /* BootSplash.storyboard */ = {isa = PBXFileReference; name = "BootSplash.storyboard"; path = "Skolar/BootSplash.storyboard"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CB7828DB209A4B4FA3313252 /* Colors.xcassets */ = {isa = PBXFileReference; name = "Colors.xcassets"; path = "Skolar/Colors.xcassets"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = folder.assetcatalog; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +109,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
+				2760187025F34B4A96717C2F /* BootSplash.storyboard */,
+				CB7828DB209A4B4FA3313252 /* Colors.xcassets */,
 			);
 			name = Skolar;
 			sourceTree = "<group>";
@@ -274,6 +280,8 @@
 				05FB9FD6930A4559AF5DA443 /* unicode.futurab.ttf in Resources */,
 				09D979B3E3094A508B6B0BF2 /* unicode.futurabb.ttf in Resources */,
 				02A6A81456FF4964B84BE4B6 /* sharefonts.net.txt in Resources */,
+				EED9A019C470469398C2C9B4 /* BootSplash.storyboard in Resources */,
+				F85C9E30A9434959AC98C479 /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
