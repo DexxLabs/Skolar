@@ -5,6 +5,7 @@ import fonts from '../data/fonts';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Snackbar from 'react-native-snackbar';
+import { useAuthStore } from '../data/authStore';
 
 
 const Login = () => {
@@ -19,17 +20,21 @@ const Login = () => {
       backgroundColor:color.secondary
     });
     
+    
   };
 
   // Mock login — replace with real API call
   if (email === 'test' && password === '1234') {
-    await AsyncStorage.setItem('token', 'fake-jwt-token');
+    const login = useAuthStore.getState().login;
+    await login('your_token_here');
     Snackbar.show({
       text: 'Logged In Successully',
       duration: Snackbar.LENGTH_SHORT,
       fontFamily:fonts.md,
       backgroundColor:color.secondary
     });
+      
+    
   } else {
     Snackbar.show({
       text: 'Invalid Credentials',

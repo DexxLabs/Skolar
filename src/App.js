@@ -9,6 +9,7 @@ import Home from './screens/Home';
 import LetsGo from './screens/LetsGo';
 import Login from './screens/Login';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useAuthStore } from './data/authStore';
 
 const Stack = createNativeStackNavigator()
 
@@ -30,21 +31,14 @@ const RootStack = () => {
   )
 }
 const App = () => {
-  const [isLoggedIn,setIsLoggedIn]=useState(false);
+  const isLoggedIn = useAuthStore(state => state.isLoggedIn);
+  const checkAuth = useAuthStore(state => state.checkAuth);
+
   useEffect(() => {
     const init = async () => {
-      try {
-        const token = await AsyncStorage.getItem('token');
-        if (token) setIsLoggedIn(true);
-        else setIsLoggedIn(false);
-      } catch (err) {
-        console.error('Token fetch error:', err);
-        setIsLoggedIn(false);
-      }
-
+      await checkAuth();
       await BootSplash.hide({ fade: true });
     };
-
     init();
   }, []);
 
