@@ -10,3 +10,5 @@ export const color = {
 export const {height,width}=Dimensions.get('window')
 
 export const padding = 16
+
+export const user = 'Veer'

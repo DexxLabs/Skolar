@@ -1,93 +1,104 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, StatusBar } from 'react-native';
-import React, { useState } from 'react'
-import { color } from '../data/color'
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  StatusBar,
+} from 'react-native';
+import React, {useState} from 'react';
+import {color} from '../data/variables';
 import fonts from '../data/fonts';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Snackbar from 'react-native-snackbar';
-import { useAuthStore } from '../data/authStore';
-
+import {useAuthStore} from '../data/authStore';
 
 const Login = () => {
-  const [email,setEmail]=useState('')
-  const [password,setPassword]=useState('')
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const login = async () => {
-  if (email=='' || password=='') {
-    Snackbar.show({
-      text: 'Field cannot be empty',
-      duration: Snackbar.LENGTH_SHORT,
-      fontFamily:fonts.md,
-      backgroundColor:color.secondary
-    });
-    
-    
+    if (email == '' || password == '') {
+      Snackbar.show({
+        text: 'Field cannot be empty',
+        duration: Snackbar.LENGTH_SHORT,
+        fontFamily: fonts.md,
+        backgroundColor: color.secondary,
+      });
+    }
+
+    // Mock login — replace with real API call
+    if (email === 'test' && password === '1234') {
+      const login = useAuthStore.getState().login;
+      await login('your_token_here');
+      Snackbar.show({
+        text: 'Logged In Successully',
+        duration: Snackbar.LENGTH_SHORT,
+        fontFamily: fonts.md,
+        backgroundColor: color.secondary,
+      });
+    } else {
+      Snackbar.show({
+        text: 'Invalid Credentials',
+        duration: Snackbar.LENGTH_SHORT,
+        fontFamily: fonts.md,
+        backgroundColor: color.secondary,
+      });
+    }
   };
-
-  // Mock login — replace with real API call
-  if (email === 'test' && password === '1234') {
-    const login = useAuthStore.getState().login;
-    await login('your_token_here');
-    Snackbar.show({
-      text: 'Logged In Successully',
-      duration: Snackbar.LENGTH_SHORT,
-      fontFamily:fonts.md,
-      backgroundColor:color.secondary
-    });
-      
-    
-  } else {
-    Snackbar.show({
-      text: 'Invalid Credentials',
-      duration: Snackbar.LENGTH_SHORT,
-      fontFamily:fonts.md,
-      backgroundColor:color.secondary
-    });
-  }
-};
-return (
+  return (
     <View style={styles.container}>
-    <View style={styles.box}>
-      <Text style={styles.label}>Email</Text>
-      <TextInput
-        onChangeText={(text)=>setEmail(text)}
-        selectionColor={color.primary}
-        style={styles.input}
-        keyboardType="email-address"
-      />
-
-      <Text style={styles.label}>Password</Text>
-      <TextInput
-        onChangeText={(text)=>setPassword(text)}
-        selectionColor={color.primary}
-        style={styles.input}
-        secureTextEntry
-      />
-
-      <TouchableOpacity onPress={()=>login()} style={styles.loginButton}>
-        <Text style={styles.loginButtonText}>LOGIN</Text>
-      </TouchableOpacity>
-
-      <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 20 }}>
-  <View style={{ flex: 1, height: 1, backgroundColor: '#ccc' }} />
-  <Text style={{ marginHorizontal: 10, color: '#888',fontFamily:fonts.md }}>OR</Text>
-  <View style={{ flex: 1, height: 1, backgroundColor: '#ccc' }} />
-</View>
-
-      <TouchableOpacity style={styles.googleButton}>
-        <Image
-          source={require("../assets/svg/google.png")}
-          style={styles.googleIcon}
+      <View style={styles.box}>
+        <Text style={styles.label}>Email</Text>
+        <TextInput
+          onChangeText={text => setEmail(text)}
+          selectionColor={color.primary}
+          style={styles.input}
+          keyboardType="email-address"
         />
-      </TouchableOpacity>
-    </View>
-  </View>
-  )
-}
 
-export default Login
+        <Text style={styles.label}>Password</Text>
+        <TextInput
+          onChangeText={text => setPassword(text)}
+          selectionColor={color.primary}
+          style={styles.input}
+          secureTextEntry
+        />
+
+        <TouchableOpacity onPress={() => login()} style={styles.loginButton}>
+          <Text style={styles.loginButtonText}>LOGIN</Text>
+        </TouchableOpacity>
+
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            marginVertical: 20,
+          }}>
+          <View style={{flex: 1, height: 1, backgroundColor: '#ccc'}} />
+          <Text
+            style={{marginHorizontal: 10, color: '#888', fontFamily: fonts.md}}>
+            OR
+          </Text>
+          <View style={{flex: 1, height: 1, backgroundColor: '#ccc'}} />
+        </View>
+
+        <TouchableOpacity style={styles.googleButton}>
+          <Image
+            source={require('../assets/svg/google.png')}
+            style={styles.googleIcon}
+          />
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
+
+export default Login;
 
 const styles = StyleSheet.create({
-  container : {
+  container: {
     flex: 1,
     backgroundColor: color.background,
     paddingTop: StatusBar.currentHeight,
@@ -99,7 +110,7 @@ const styles = StyleSheet.create({
     width: '85%',
     padding: 20,
     borderColor: color.secondary,
-    borderWidth:2,
+    borderWidth: 2,
     borderRadius: 12,
   },
   label: {
@@ -108,15 +119,15 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     marginTop: 15,
     color: color.text,
-    fontFamily:fonts.md
+    fontFamily: fonts.md,
   },
   input: {
     borderRadius: 8,
     borderColor: color.secondary,
-    borderWidth:2,
+    borderWidth: 2,
     padding: 10,
     fontSize: 16,
-    fontFamily:fonts.md
+    fontFamily: fonts.md,
   },
   loginButton: {
     backgroundColor: color.primary,
@@ -129,7 +140,7 @@ const styles = StyleSheet.create({
     color: color.text,
     fontWeight: '600',
     fontSize: 16,
-    fontFamily:fonts.md
+    fontFamily: fonts.md,
   },
   googleButton: {
     alignSelf: 'center',

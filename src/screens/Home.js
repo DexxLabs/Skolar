@@ -1,54 +1,44 @@
 import {
+  Image,
   StatusBar,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
 import React from 'react';
-import {color, height, padding, width} from '../data/color';
+import {color, height, padding, width} from '../data/variables';
 import fonts from '../data/fonts';
-import { useAuthStore } from '../data/authStore';
+import {useAuthStore} from '../data/authStore';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
 
 const Home = () => {
   const logout = async () => {
     const logout = useAuthStore.getState().logout;
     await logout();
   };
+const no = useAuthStore(state=>state.regno)
 
-  return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: color.background,
-        paddingTop: StatusBar.currentHeight,
-        paddingHorizontal: 12,
-      }}>
-      <Text style={{color: '#fff'}}>Hello There</Text>
-      <TouchableOpacity
-        style={{
-          backgroundColor: color.primary,
-          height: height / 30,
-          width: width / 2 - padding * 2,
-          borderRadius: height / 100,
-        }}
-        onPress={() => logout()}>
-        <Text
+return(
+  <View
           style={{
-            textAlign: 'center',
-            textAlignVertical: 'center',
             flex: 1,
-            color: color.text,
-            fontSize: 16,
-            fontFamily: fonts.md,
+            backgroundColor: color.background,
+            paddingTop: StatusBar.currentHeight + padding,
+            paddingHorizontal: padding,
+            alignItems: 'center',
+            justifyContent: 'center',
           }}>
-          LOGOUT
-        </Text>
-      </TouchableOpacity>
-    </View>
-  );
+            <Text style={{color:'white'}}>There : {no}</Text>
+          </View>
+)
 };
 
 export default Home;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  
+});

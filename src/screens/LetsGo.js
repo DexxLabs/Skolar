@@ -6,12 +6,12 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import {color, height, padding, width} from '../data/color';
+import {color, height, padding, width} from '../data/variables';
 import fonts from '../data/fonts';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 const LetsGo = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   return (
     <View
       style={{
@@ -21,16 +21,15 @@ const LetsGo = () => {
         paddingHorizontal: 12,
       }}>
       <View style={{flex: 9}}></View>
-      <View style={{flex: 1.5,alignItems:'center',justifyContent:'center'}}>
+      <View style={{flex: 1.5, alignItems: 'center', justifyContent: 'center'}}>
         <TouchableOpacity
           style={{
             backgroundColor: color.primary,
             height: height / 15,
-            width: width-padding*2,
+            width: width - padding * 2,
             borderRadius: height / 100,
           }}
-          onPress={()=>navigation.navigate('Login') }
-          >
+          onPress={() => navigation.navigate('Login')}>
           <Text
             style={{
               textAlign: 'center',
