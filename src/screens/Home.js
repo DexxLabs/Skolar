@@ -11,15 +11,20 @@ import React from 'react';
 import {color, height, padding, width} from '../data/variables';
 import fonts from '../data/fonts';
 import {useAuthStore} from '../data/authStore';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import Card from './components/Card';
+import Header from './components/Header';
+import Palette from './components/Palette';
 
 
 
 const Home = () => {
+
+  //logout function
   const logout = async () => {
     const logout = useAuthStore.getState().logout;
     await logout();
   };
+  // registration no fetch -- useAuthStore -> regno (asyncStorage.getItem('regno'))
 const no = useAuthStore(state=>state.regno)
 
 return(
@@ -29,10 +34,14 @@ return(
             backgroundColor: color.background,
             paddingTop: StatusBar.currentHeight + padding,
             paddingHorizontal: padding,
-            alignItems: 'center',
-            justifyContent: 'center',
+            
           }}>
-            <Text style={{color:'white'}}>There : {no}</Text>
+
+            {/* header */}
+            <Header/>
+            {/*maincard*/}
+            <Card/>
+
           </View>
 )
 };

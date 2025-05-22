@@ -26,11 +26,11 @@ const LoginStack = () => {
   );
 };
 
-const RootStack = () => {
-    const checkRegno = useAuthStore(state => state.checkRegno);
+const RootStack = ({prop}) => {
+  console.log(prop)
   return (
     <Stack.Navigator
-      initialRouteName={checkRegno?'TabNavigator':'RegNo'}
+      initialRouteName={prop?'TabNavigator':'RegNo'}
       screenOptions={{headerShown: false}}>
       <Stack.Screen component={RegNo} name="RegNo" />
       <Stack.Screen component={TabNavigator} name="TabNavigator" />
@@ -40,22 +40,34 @@ const RootStack = () => {
 };
 const App = () => {
   const isLoggedIn = useAuthStore(state => state.isLoggedIn);
-  const checkAuth = useAuthStore(state => state.checkAuth);
-  const checkRegno = useAuthStore(state => state.checkRegno);
+  const hydrate = useAuthStore(state => state.hydrate);
+  const isRegno = useAuthStore(state => state.isRegno);
+
+  const [isAppReady, setIsAppReady] = useState(false); 
 
   useEffect(() => {
     const init = async () => {
-      await checkAuth();
-      await checkRegno();
-      await BootSplash.hide({fade: true});
+      await hydrate();
+      setIsAppReady(true);
     };
     init();
   }, []);
 
+  // hide splash only AFTER ready
+  useEffect(() => {
+    if (isAppReady) {
+      setTimeout(() => BootSplash.hide({ fade: true }), 100); // slight delay helps transition
+    }
+  }, [isAppReady]);
+
+  if (!isAppReady) {
+    return null;
+  }
+
   return (
-    <View style={{flex: 1, backgroundColor: color.background}}>
+    <View style={{ flex: 1, backgroundColor: color.background }}>
       <NavigationContainer>
-        {isLoggedIn ? <RootStack /> : <LoginStack />}
+        {isLoggedIn ? <RootStack prop={isRegno} /> : <LoginStack />}
       </NavigationContainer>
     </View>
   );

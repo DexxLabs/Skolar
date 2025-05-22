@@ -33,6 +33,15 @@
 		02A6A81456FF4964B84BE4B6 /* sharefonts.net.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8380636A7B964FA481E99156 /* sharefonts.net.txt */; };
 		EED9A019C470469398C2C9B4 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2760187025F34B4A96717C2F /* BootSplash.storyboard */; };
 		F85C9E30A9434959AC98C479 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB7828DB209A4B4FA3313252 /* Colors.xcassets */; };
+		EB502F867DD048D3BF3D9F45 /* Lexend-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47B363A118234E068A755091 /* Lexend-Black.ttf */; };
+		0A185D0D9E854BADADF2176D /* Lexend-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 437708517AA248B4A3339428 /* Lexend-Bold.ttf */; };
+		675A7F765FEE40CABFC2F3FF /* Lexend-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9059ED19C0D4849825CA02E /* Lexend-ExtraBold.ttf */; };
+		44C2D78603CA42B081BF898E /* Lexend-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1678E9EB87164F6C9689EC6F /* Lexend-ExtraLight.ttf */; };
+		A5A3EF8FCE1D43C18534FA0E /* Lexend-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16B036F9597E49A49C74F89B /* Lexend-Light.ttf */; };
+		DB4CC0756FBA4FD5A3C72F94 /* Lexend-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EAB9F79D7B5C413A9730DD8B /* Lexend-Medium.ttf */; };
+		5E65837E05084840B1C372AB /* Lexend-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 44C578BCA00648E1AB83607E /* Lexend-Regular.ttf */; };
+		0303C2A8CBBA47B992A5CBD0 /* Lexend-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B53CECEAF7D246338737890B /* Lexend-SemiBold.ttf */; };
+		52491BC0D4DF424CBA8FA571 /* Lexend-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B806B1D0858E44FDA1FEF19F /* Lexend-Thin.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +88,15 @@
 		8380636A7B964FA481E99156 /* sharefonts.net.txt */ = {isa = PBXFileReference; name = "sharefonts.net.txt"; path = "../src/assets/fonts/sharefonts.net.txt"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		2760187025F34B4A96717C2F /* BootSplash.storyboard */ = {isa = PBXFileReference; name = "BootSplash.storyboard"; path = "Skolar/BootSplash.storyboard"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		CB7828DB209A4B4FA3313252 /* Colors.xcassets */ = {isa = PBXFileReference; name = "Colors.xcassets"; path = "Skolar/Colors.xcassets"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = folder.assetcatalog; explicitFileType = undefined; includeInIndex = 0; };
+		47B363A118234E068A755091 /* Lexend-Black.ttf */ = {isa = PBXFileReference; name = "Lexend-Black.ttf"; path = "../src/assets/fonts2/Lexend-Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		437708517AA248B4A3339428 /* Lexend-Bold.ttf */ = {isa = PBXFileReference; name = "Lexend-Bold.ttf"; path = "../src/assets/fonts2/Lexend-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E9059ED19C0D4849825CA02E /* Lexend-ExtraBold.ttf */ = {isa = PBXFileReference; name = "Lexend-ExtraBold.ttf"; path = "../src/assets/fonts2/Lexend-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1678E9EB87164F6C9689EC6F /* Lexend-ExtraLight.ttf */ = {isa = PBXFileReference; name = "Lexend-ExtraLight.ttf"; path = "../src/assets/fonts2/Lexend-ExtraLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		16B036F9597E49A49C74F89B /* Lexend-Light.ttf */ = {isa = PBXFileReference; name = "Lexend-Light.ttf"; path = "../src/assets/fonts2/Lexend-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		EAB9F79D7B5C413A9730DD8B /* Lexend-Medium.ttf */ = {isa = PBXFileReference; name = "Lexend-Medium.ttf"; path = "../src/assets/fonts2/Lexend-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		44C578BCA00648E1AB83607E /* Lexend-Regular.ttf */ = {isa = PBXFileReference; name = "Lexend-Regular.ttf"; path = "../src/assets/fonts2/Lexend-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B53CECEAF7D246338737890B /* Lexend-SemiBold.ttf */ = {isa = PBXFileReference; name = "Lexend-SemiBold.ttf"; path = "../src/assets/fonts2/Lexend-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B806B1D0858E44FDA1FEF19F /* Lexend-Thin.ttf */ = {isa = PBXFileReference; name = "Lexend-Thin.ttf"; path = "../src/assets/fonts2/Lexend-Thin.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +204,15 @@
 				DAE5EDE6694046C48E8AAAAF /* unicode.futurab.ttf */,
 				86240B7383C7489E9E394196 /* unicode.futurabb.ttf */,
 				8380636A7B964FA481E99156 /* sharefonts.net.txt */,
+				47B363A118234E068A755091 /* Lexend-Black.ttf */,
+				437708517AA248B4A3339428 /* Lexend-Bold.ttf */,
+				E9059ED19C0D4849825CA02E /* Lexend-ExtraBold.ttf */,
+				1678E9EB87164F6C9689EC6F /* Lexend-ExtraLight.ttf */,
+				16B036F9597E49A49C74F89B /* Lexend-Light.ttf */,
+				EAB9F79D7B5C413A9730DD8B /* Lexend-Medium.ttf */,
+				44C578BCA00648E1AB83607E /* Lexend-Regular.ttf */,
+				B53CECEAF7D246338737890B /* Lexend-SemiBold.ttf */,
+				B806B1D0858E44FDA1FEF19F /* Lexend-Thin.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -282,6 +309,15 @@
 				02A6A81456FF4964B84BE4B6 /* sharefonts.net.txt in Resources */,
 				EED9A019C470469398C2C9B4 /* BootSplash.storyboard in Resources */,
 				F85C9E30A9434959AC98C479 /* Colors.xcassets in Resources */,
+				EB502F867DD048D3BF3D9F45 /* Lexend-Black.ttf in Resources */,
+				0A185D0D9E854BADADF2176D /* Lexend-Bold.ttf in Resources */,
+				675A7F765FEE40CABFC2F3FF /* Lexend-ExtraBold.ttf in Resources */,
+				44C2D78603CA42B081BF898E /* Lexend-ExtraLight.ttf in Resources */,
+				A5A3EF8FCE1D43C18534FA0E /* Lexend-Light.ttf in Resources */,
+				DB4CC0756FBA4FD5A3C72F94 /* Lexend-Medium.ttf in Resources */,
+				5E65837E05084840B1C372AB /* Lexend-Regular.ttf in Resources */,
+				0303C2A8CBBA47B992A5CBD0 /* Lexend-SemiBold.ttf in Resources */,
+				52491BC0D4DF424CBA8FA571 /* Lexend-Thin.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -37,6 +37,17 @@ export const useAuthStore = create((set) => ({
   fetchRegno: async () => {
     const no = await AsyncStorage.getItem('regno')
     set({regno:no})
+  },
+
+  hydrate: async () => {
+    const token = await AsyncStorage.getItem('token');
+    const regno = await AsyncStorage.getItem('regno');
+  
+    set({
+      isLoggedIn: !!token,
+      isRegno: !!regno,
+      regno,
+    });
   }
 }));
 
