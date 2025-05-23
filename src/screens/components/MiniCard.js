@@ -3,10 +3,14 @@ import {StyleSheet, Text, View} from 'react-native';
 import CircularProgress from 'react-native-circular-progress-indicator';
 import fonts from '../../data/fonts';
 import {color, height, padding} from '../../data/variables';
+import * as Animatable from 'react-native-animatable';
+
 
 const MiniCard = ({subject, attendance, total, isBunkable, amount, value}) => {
   const [showProgress, setShowProgress] = useState(false);
-
+  const getRandomValue = () => {
+    return Math.floor(Math.random() * (1800 - 1300 + 1)) + 1000;
+  };
   useEffect(() => {
     const timeout = setTimeout(() => {
       setShowProgress(true);
@@ -16,7 +20,7 @@ const MiniCard = ({subject, attendance, total, isBunkable, amount, value}) => {
   }, []);
     //function to calculate percentage
     return (
-      <View
+      <Animatable.View animation='fadeIn' duration={500}
         style={{
           height: height / 7,
           borderColor: color.secondary,
@@ -48,7 +52,7 @@ const MiniCard = ({subject, attendance, total, isBunkable, amount, value}) => {
             <CircularProgress
               value={value}
               radius={50}
-              duration={1500}
+              duration={getRandomValue()}
               progressValueColor="white"
               progressValueFontSize={15}
               progressValueStyle={{fontFamily: fonts.m}}
@@ -59,10 +63,15 @@ const MiniCard = ({subject, attendance, total, isBunkable, amount, value}) => {
               activeStrokeColor={color.primary}
               inActiveStrokeWidth={5}
               activeStrokeWidth={5}
+              progressFormatter={(value) => {
+                'worklet';
+                  
+                return value.toFixed(2);
+              }}
             />
           )}
         </View>
-      </View>
+      </Animatable.View>
     );
   };
 

@@ -17,8 +17,8 @@ import CategoryBox from './components/categoryBox';
 
 const dummySubjects = [
   { id: '1', subject: 'DAA', attendance: 80, total: 100, isBunkable: true, amount: 3 },
-  { id: '2', subject: 'Maths', attendance: 92, total: 100, isBunkable: false, amount: 0 },
-  { id: '3', subject: 'Physics', attendance: 76, total: 100, isBunkable: true, amount: 2 },
+  { id: '2', subject: 'Maths', attendance: 92, total: 100, isBunkable: true, amount: 5 },
+  { id: '3', subject: 'Physics', attendance: 76, total: 80, isBunkable: true, amount: 2 },
   { id: '4', subject: 'Chemistry', attendance: 60, total: 100, isBunkable: false, amount: 0 },
   { id: '5', subject: 'CS', attendance: 85, total: 100, isBunkable: true, amount: 5 },
   { id: '6', subject: 'OS', attendance: 50, total: 100, isBunkable: false, amount: 0 },
@@ -26,7 +26,6 @@ const dummySubjects = [
 
 const Home = () => {
   const [selectedId, setSelectedId] = useState(1);
-  const [selectedCategory, setSelectedCategory] = useState('');
 
   const logout = async () => {
     const logout = useAuthStore.getState().logout;
@@ -59,7 +58,7 @@ const Home = () => {
       }}>
       
       <FlatList
-        data={dummySubjects}
+        data={dummySubjects.filter((subject)=>subject.id.includes(selectedId))}
         keyExtractor={item => item.id}
         renderItem={renderMiniCard}
         showsVerticalScrollIndicator={false}
@@ -95,7 +94,6 @@ const Home = () => {
             <Pressable
               onPress={() => {
                 setSelectedId(item.id);
-                setSelectedCategory(item.subject);
               }}
             >
               <CategoryBox name={item.subject} focused={selectedId == item.id} />

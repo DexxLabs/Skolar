@@ -6054,6 +6054,13 @@ react-is@^19.0.0, react-is@^19.1.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-19.1.0.tgz#805bce321546b7e14c084989c77022351bbdd11b"
   integrity sha512-Oe56aUPnkHyyDxxkvqtd7KkdQP5uIUfHxd5XTb3wE9d/kRnZLmKbDB0GWk919tdQ+mxxPtG6EAs6RMT6i1qtHg==
 
+react-native-animatable@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-animatable/-/react-native-animatable-1.4.0.tgz#05a259e1566081ce7d3f6fba1e92edc65f5c6160"
+  integrity sha512-DZwaDVWm2NBvBxf7I0wXKXLKb/TxDnkV53sWhCvei1pRyTX3MVFpkvdYBknNBqPrxYuAIlPxEp7gJOidIauUkw==
+  dependencies:
+    prop-types "^15.8.1"
+
 react-native-bootsplash@^6.3.8:
   version "6.3.8"
   resolved "https://registry.yarnpkg.com/react-native-bootsplash/-/react-native-bootsplash-6.3.8.tgz#9d9883993f397daa18a69bd1ac23f90f3643fc0b"

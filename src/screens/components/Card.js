@@ -3,6 +3,8 @@ import React, {useEffect, useState} from 'react';
 import {color, height, padding} from '../../data/variables';
 import CircularProgress from 'react-native-circular-progress-indicator';
 import fonts from '../../data/fonts';
+import * as Animatable from 'react-native-animatable';
+
 
 const Card = ({attendance, name, regno, total, value, branch}) => {
   const [showProgress, setShowProgress] = useState(false);
@@ -16,7 +18,7 @@ const Card = ({attendance, name, regno, total, value, branch}) => {
   }, []);
 
   return (
-    <View
+    <Animatable.View animation='fadeIn' duration={500}
       style={{
         height: height / 5,
         borderColor: color.secondary,
@@ -32,7 +34,7 @@ const Card = ({attendance, name, regno, total, value, branch}) => {
         <View style={{flex: 1, justifyContent: 'space-evenly'}}>
           <View style={{flexDirection: 'row'}}>
             <Text style={styles.desc}>Name : </Text>
-            <Text style={[styles.desc, {color: color.primary}]}>{name}</Text>
+            <Text style={[styles.desc, {fontFamily:fonts.m,color: color.primary}]}>{name}</Text>
           </View>
 
           <View style={{flexDirection: 'row'}}>
@@ -70,10 +72,15 @@ const Card = ({attendance, name, regno, total, value, branch}) => {
             activeStrokeColor={color.primary}
             inActiveStrokeWidth={7}
             activeStrokeWidth={7}
+            progressFormatter={(value) => {
+              'worklet';
+                
+              return value.toFixed(2); // 2 decimal places
+            }}
           />
         )}
       </View>
-    </View>
+    </Animatable.View>
   );
 };
 
