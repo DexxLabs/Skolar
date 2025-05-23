@@ -6,9 +6,9 @@ import fonts from '../../data/fonts';
 import * as Animatable from 'react-native-animatable';
 
 
-const Card = ({attendance, name, regno, total, value, branch}) => {
+const GradeCard = ({attendance, name, regno, total, value, branch}) => {
   const [showProgress, setShowProgress] = useState(false);
-  const zone = value>75.00
+
   useEffect(() => {
     const timeout = setTimeout(() => {
       setShowProgress(true);
@@ -48,7 +48,7 @@ const Card = ({attendance, name, regno, total, value, branch}) => {
           </View>
 
           <View style={{flexDirection: 'row'}}>
-            <Text style={styles.desc}>Total Attendance : </Text>
+            <Text style={styles.desc}>Total Attendance :</Text>
             <Text style={styles.desc}>{attendance}</Text>
             <Text style={[styles.desc, {color: color.primary}]}>/{total}</Text>
           </View>
@@ -66,16 +66,16 @@ const Card = ({attendance, name, regno, total, value, branch}) => {
             progressValueFontSize={18}
             progressValueStyle={{fontFamily: fonts.m}}
             valueSuffix={'%'}
-            inActiveStrokeColor={zone?color.primary:color.warn}
+            inActiveStrokeColor={color.primary}
             inActiveStrokeOpacity={0.1}
             maxValue={100}
-            activeStrokeColor={zone?color.primary:color.warn}
+            activeStrokeColor={color.primary}
             inActiveStrokeWidth={7}
             activeStrokeWidth={7}
             progressFormatter={(value) => {
               'worklet';
                 
-              return value.toFixed(2); 
+              return value.toFixed(2); // 2 decimal places
             }}
           />
         )}
@@ -84,7 +84,7 @@ const Card = ({attendance, name, regno, total, value, branch}) => {
   );
 };
 
-export default Card;
+export default GradeCard;
 
 const styles = StyleSheet.create({
   desc: {

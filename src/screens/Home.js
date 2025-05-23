@@ -14,24 +14,63 @@ import Card from './components/Card';
 import Header from './components/Header';
 import MiniCard from './components/MiniCard';
 import CategoryBox from './components/categoryBox';
+import { dummySubjects } from '../data/fetchedData';
 
-const dummySubjects = [
-  { id: '1', subject: 'DAA', attendance: 80, total: 100, isBunkable: true, amount: 3 },
-  { id: '2', subject: 'Maths', attendance: 92, total: 100, isBunkable: true, amount: 5 },
-  { id: '3', subject: 'Physics', attendance: 76, total: 80, isBunkable: true, amount: 2 },
-  { id: '4', subject: 'Chemistry', attendance: 60, total: 100, isBunkable: false, amount: 0 },
-  { id: '5', subject: 'CS', attendance: 85, total: 100, isBunkable: true, amount: 5 },
-  { id: '6', subject: 'OS', attendance: 50, total: 100, isBunkable: false, amount: 0 },
-];
+function processSubjects(subjects) {
+  return subjects.map((subject) => {
+    const { attendance: A, total: T } = subject;
+
+    const percentage = ((A / T) * 100).toFixed(2);
+
+    let isBunkable = false;
+    let amount = 0;
+
+    if (percentage >= 75) {
+      // how many more lectures you can skip without dropping below 75%
+      amount = Math.floor((A - 0.75 * T) / 0.75);
+      isBunkable = true;
+    } else {
+      // how many more lectures you must attend consecutively to reach 75%
+      // solving: (A + x) / (T + x) = 0.75
+      amount = Math.ceil((0.75 * T - A) / 0.25);
+      isBunkable = false;
+    }
+
+    return {
+      id: subject.id,
+      subject: subject.subject,
+      attendance: A,
+      total: T,
+      percentage,
+      isBunkable,
+      amount,
+    };
+  });
+}
+
+
+const getTotalAttendance = (subjects) => {
+  const totalAttended = subjects.reduce((sum, subject) => sum + subject.attendance, 0);
+  const totalClasses = subjects.reduce((sum, subject) => sum + subject.total, 0);
+
+  const percentage = totalClasses === 0 ? 0 : (totalAttended / totalClasses) * 100;
+
+  return {
+    totalAttended,
+    totalClasses,
+    percentage: Number(percentage.toFixed(2)), // rounded to 2 decimal places
+  };
+};
 
 const Home = () => {
   const [selectedId, setSelectedId] = useState(1);
-
+  const studentData = processSubjects(dummySubjects);
+  console.log(studentData)
+  const result=getTotalAttendance(dummySubjects)
   const logout = async () => {
     const logout = useAuthStore.getState().logout;
     await logout();
   };
-
   const no = useAuthStore(state => state.regno);
 
   const renderMiniCard = ({ item }) => {
@@ -43,7 +82,7 @@ const Home = () => {
       total={item.total}
       isBunkable={item.isBunkable}
       amount={item.amount}
-      value={value}
+      value={item.percentage}
     />
     )
   };
@@ -58,17 +97,16 @@ const Home = () => {
       }}>
       
       <FlatList
-        data={dummySubjects.filter((subject)=>subject.id.includes(selectedId))}
+        data={studentData.filter((subject)=>subject.id.includes(selectedId))}
         keyExtractor={item => item.id}
         renderItem={renderMiniCard}
         showsVerticalScrollIndicator={false}
-        initialNumToRender={6}
+        initialNumToRender={1}
         removeClippedSubviews={false}
-        extraData={dummySubjects}
         ListHeaderComponent={
           <>
             <Header />
-            <Card attendance={60} total={100} name={'Ranbeer'} regno={no} value={60} branch={'IT'}/>
+            <Card attendance={result.totalAttended} total={result.totalClasses} name={'Ranbeer'} regno={no} value={result.percentage} branch={'IT'}/>
             <Text
               style={[
                 styles.desc,

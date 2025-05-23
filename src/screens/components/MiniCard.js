@@ -8,6 +8,7 @@ import * as Animatable from 'react-native-animatable';
 
 const MiniCard = ({subject, attendance, total, isBunkable, amount, value}) => {
   const [showProgress, setShowProgress] = useState(false);
+  const zone = value>75.00
   const getRandomValue = () => {
     return Math.floor(Math.random() * (1800 - 1300 + 1)) + 1000;
   };
@@ -41,7 +42,7 @@ const MiniCard = ({subject, attendance, total, isBunkable, amount, value}) => {
   
             <View style={{flexDirection: 'row'}}>
               <Text style={styles.desc}>{isBunkable ? 'Bunkable : ' : 'Need to Attend : '}</Text>
-              <Text style={[styles.desc, {color: isBunkable ? color.primary : '#BF0000'}]}>{amount}</Text>
+              <Text style={[styles.desc, {color: isBunkable ? color.primary : color.warn}]}>{amount}</Text>
               <Text style={styles.desc}> Classes</Text>
             </View>
           </View>
@@ -57,17 +58,13 @@ const MiniCard = ({subject, attendance, total, isBunkable, amount, value}) => {
               progressValueFontSize={15}
               progressValueStyle={{fontFamily: fonts.m}}
               valueSuffix={'%'}
-              inActiveStrokeColor={color.primary}
+              inActiveStrokeColor={zone?color.primary:color.warn}
               inActiveStrokeOpacity={0.1}
               maxValue={100}
-              activeStrokeColor={color.primary}
+              activeStrokeColor={zone?color.primary:color.warn}
               inActiveStrokeWidth={5}
               activeStrokeWidth={5}
-              progressFormatter={(value) => {
-                'worklet';
-                  
-                return value.toFixed(2);
-              }}
+              
             />
           )}
         </View>
