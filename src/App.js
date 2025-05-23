@@ -56,7 +56,7 @@ const App = () => {
   // hide splash only AFTER ready
   useEffect(() => {
     if (isAppReady) {
-      setTimeout(() => BootSplash.hide({ fade: true }), 100); // slight delay helps transition
+      setTimeout(() => BootSplash.hide({ fade: true }) ); // slight delay helps transition
     }
   }, [isAppReady]);
 
