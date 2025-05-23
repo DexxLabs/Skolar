@@ -58,23 +58,26 @@ const getTotalAttendance = (subjects) => {
   return {
     totalAttended,
     totalClasses,
-    percentage: Number(percentage.toFixed(2)), // rounded to 2 decimal places
+    percentage
   };
 };
 
 const Home = () => {
   const [selectedId, setSelectedId] = useState(1);
   const studentData = processSubjects(dummySubjects);
-  console.log(studentData)
   const result=getTotalAttendance(dummySubjects)
+
+
+  //logout function
   const logout = async () => {
     const logout = useAuthStore.getState().logout;
     await logout();
   };
+
+  //fetch registration no --To be replaced by db-fetch
   const no = useAuthStore(state => state.regno);
 
   const renderMiniCard = ({ item }) => {
-    const value = (item.attendance / item.total) * 100;
     return(
     <MiniCard
       subject={item.subject}
@@ -82,7 +85,7 @@ const Home = () => {
       total={item.total}
       isBunkable={item.isBunkable}
       amount={item.amount}
-      value={item.percentage}
+      value={parseFloat(item.percentage)}
     />
     )
   };

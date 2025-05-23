@@ -8,7 +8,7 @@ import * as Animatable from 'react-native-animatable';
 
 const Card = ({attendance, name, regno, total, value, branch}) => {
   const [showProgress, setShowProgress] = useState(false);
-  const zone = value>75.00
+  const zone = value>=75.00
   useEffect(() => {
     const timeout = setTimeout(() => {
       setShowProgress(true);

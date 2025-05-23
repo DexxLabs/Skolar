@@ -8,7 +8,7 @@ import * as Animatable from 'react-native-animatable';
 
 const MiniCard = ({subject, attendance, total, isBunkable, amount, value}) => {
   const [showProgress, setShowProgress] = useState(false);
-  const zone = value>75.00
+  const zone = value>=75.00
   const getRandomValue = () => {
     return Math.floor(Math.random() * (1800 - 1300 + 1)) + 1000;
   };
@@ -64,7 +64,11 @@ const MiniCard = ({subject, attendance, total, isBunkable, amount, value}) => {
               activeStrokeColor={zone?color.primary:color.warn}
               inActiveStrokeWidth={5}
               activeStrokeWidth={5}
-              
+              progressFormatter={(value) => {
+                'worklet';
+                  
+                return value.toFixed(2);
+              }}
             />
           )}
         </View>
