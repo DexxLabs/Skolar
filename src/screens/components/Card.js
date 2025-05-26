@@ -60,7 +60,7 @@ const Card = ({attendance, name, regno, total, value, branch}) => {
         {showProgress && (
           <CircularProgress
             value={value}
-            radius={70}
+            radius={height/12}
             duration={1500}
             progressValueColor="white"
             progressValueFontSize={18}

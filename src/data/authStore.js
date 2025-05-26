@@ -14,6 +14,8 @@ export const useAuthStore = create((set) => ({
   logout: async () => {
     await AsyncStorage.removeItem('token');
     set({ isLoggedIn: false });
+    set({ regno: '' });
+    set({ isRegno: false });
   },
 
   checkAuth: async () => {

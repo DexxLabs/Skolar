@@ -6,7 +6,7 @@ import fonts from '../../data/fonts';
 import * as Animatable from 'react-native-animatable';
 
 
-const GradeCard = ({attendance, name, regno, total, value, branch}) => {
+const GradeCard = ({name, regno,branch,cgpa}) => {
   const [showProgress, setShowProgress] = useState(false);
 
   useEffect(() => {
@@ -48,9 +48,9 @@ const GradeCard = ({attendance, name, regno, total, value, branch}) => {
           </View>
 
           <View style={{flexDirection: 'row'}}>
-            <Text style={styles.desc}>Total Attendance :</Text>
-            <Text style={styles.desc}>{attendance}</Text>
-            <Text style={[styles.desc, {color: color.primary}]}>/{total}</Text>
+            <Text style={styles.desc}>CGPA : </Text>
+            <Text style={styles.desc}>{cgpa}</Text>
+            <Text style={[styles.desc, {color: color.primary}]}>/10</Text>
           </View>
         </View>
       </View>
@@ -59,16 +59,15 @@ const GradeCard = ({attendance, name, regno, total, value, branch}) => {
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         {showProgress && (
           <CircularProgress
-            value={value}
-            radius={70}
+            value={cgpa}
+            radius={height/12}
             duration={1500}
             progressValueColor="white"
             progressValueFontSize={18}
             progressValueStyle={{fontFamily: fonts.m}}
-            valueSuffix={'%'}
             inActiveStrokeColor={color.primary}
             inActiveStrokeOpacity={0.1}
-            maxValue={100}
+            maxValue={10}
             activeStrokeColor={color.primary}
             inActiveStrokeWidth={7}
             activeStrokeWidth={7}

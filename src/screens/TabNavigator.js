@@ -7,25 +7,18 @@ import Grade from './Grade'
 
 const {height,width} = Dimensions.get('window')
 const Tab = createBottomTabNavigator()
-const CustomTabButton = ({ children, onPress, style }) => {
-  return (
-    <TouchableOpacity
-      style={[
-        {
-          flex:1,
-          justifyContent: 'center',
-          alignItems: 'center',
-          width: width / 6,
-          backgroundColor: 'transparent',
-
-        },
-        style, // allows passing in extra styles
-      ]}
-      onPress={onPress}>
-      {children}
-    </TouchableOpacity>
-  );
-};
+const CustomTabButton = ({ children, onPress }) => (
+  <TouchableOpacity
+    onPress={onPress}
+    style={{
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    }}
+  >
+    {children}
+  </TouchableOpacity>
+);
 
 
 const TabNavigator = () => {
@@ -45,7 +38,10 @@ const TabNavigator = () => {
           alignItems: 'center',
           justifyContent: 'space-around',
           marginHorizontal: width/3,
-          backgroundColor: color.secondary
+          backgroundColor: color.secondary,
+          borderTopWidth:0,
+          elevation: 0, 
+          shadowOpacity: 0, 
         }
     }}
     >

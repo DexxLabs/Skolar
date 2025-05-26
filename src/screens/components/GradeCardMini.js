@@ -6,11 +6,17 @@ import {color, height, padding} from '../../data/variables';
 import * as Animatable from 'react-native-animatable';
 
 
-const MiniCard = ({subject, attendance, total, isBunkable, amount, value}) => {
+
+const GradeCardMini = ({subject, grade, value}) => {
   const [showProgress, setShowProgress] = useState(false);
-  const zone = value>=75.00
+  const [isBack, setisBack]=useState(false)
+  useEffect(() => {
+    if (grade === 'Ab' || grade === 'F') {
+      setisBack(true);
+    }
+  }, [grade]);
   const getRandomValue = () => {
-    return Math.floor(Math.random() * (1800 - 1300 + 1)) + 1000;
+    return Math.floor(Math.random() * (1800 - 1300 + 1)) + 500;
   };
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -19,55 +25,49 @@ const MiniCard = ({subject, attendance, total, isBunkable, amount, value}) => {
 
     return () => clearTimeout(timeout);
   }, []);
-    //function to calculate percentage
+
     return (
       <Animatable.View animation='fadeIn' duration={500}
         style={{
-          height: height / 7,
+          height: height / 10,
           borderColor: color.secondary,
           borderWidth: 2,
           borderRadius: 16,
           marginTop: padding,
           flexDirection: 'row',
         }}>
-        <View style={{flex: 1, margin: padding}}>
-          <Text style={[styles.desc, {fontFamily: fonts.m, fontSize: 20}]}>{subject}</Text>
+        <View style={{flex: 1, margin: padding,justifyContent:'center'}}>
+
+          <Text style={[styles.desc, {fontFamily: fonts.m, fontSize: 16,flexWrap:'wrap'}]}>{subject}</Text>
   
-          <View style={{flex: 1, justifyContent: 'space-evenly'}}>
-            <View style={{flexDirection: 'row'}}>
-              <Text style={styles.desc}>Total Attendance :</Text>
-              <Text style={styles.desc}>{attendance}</Text>
-              <Text style={[styles.desc, {color: color.primary}]}>/{total}</Text>
-            </View>
-  
-            <View style={{flexDirection: 'row'}}>
-              <Text style={styles.desc}>{isBunkable ? 'Bunkable : ' : 'Need to Attend : '}</Text>
-              <Text style={[styles.desc, {color: isBunkable ? color.primary : color.warn}]}>{amount}</Text>
-              <Text style={styles.desc}> Classes</Text>
-            </View>
-          </View>
         </View>
   
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
           {showProgress && (
             <CircularProgress
               value={value}
-              radius={height/18}
+              radius={height/25}
               duration={getRandomValue()}
               progressValueColor="white"
               progressValueFontSize={15}
               progressValueStyle={{fontFamily: fonts.m}}
-              valueSuffix={'%'}
-              inActiveStrokeColor={zone?color.primary:color.warn}
+              inActiveStrokeColor={isBack?color.warn:color.primary}
               inActiveStrokeOpacity={0.1}
               maxValue={100}
-              activeStrokeColor={zone?color.primary:color.warn}
+              activeStrokeColor={isBack?color.warn:color.primary}
               inActiveStrokeWidth={5}
               activeStrokeWidth={5}
-              progressFormatter={(value) => {
+              progressFormatter={(v) => {
                 'worklet';
-                  
-                return value.toFixed(2);
+                if (v >= 90) return 'O';
+                if (v >= 80) return 'A+';
+                if (v >= 70) return 'A';
+                if (v >= 60) return 'B+';
+                if (v >= 50) return 'B';
+                if (v >= 40) return 'C';
+                if (v >= 35) return 'P';
+                if (v === 0) {return 'Ab';};
+                return 'F';
               }}
             />
           )}
@@ -77,7 +77,7 @@ const MiniCard = ({subject, attendance, total, isBunkable, amount, value}) => {
   };
 
 
-export default MiniCard;
+export default GradeCardMini;
 
 const styles = StyleSheet.create({
   desc: {

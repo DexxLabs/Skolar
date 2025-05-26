@@ -1,18 +1,20 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { color, user } from '../../data/variables'
+import { color, profile, user } from '../../data/variables'
 import fonts from '../../data/fonts'
+import { useNavigation } from '@react-navigation/native'
 
 const Header = () => {
+  const navigation = useNavigation()
   return (
     <View style={styles.headerWrapper}>
     <View >
         <Text style={styles.headerText}>Hello</Text>
         <Text style={styles.headerText2}>{user}</Text>
     </View>
-    <View>
-      <Image source={{uri:'https://i.pinimg.com/736x/ac/6b/13/ac6b1392be57602c482e0317acaa3f4a.jpg'}} style={styles.imageHandler}/>
-    </View>
+    <Pressable onPress={()=>navigation.navigate("Profile")}>
+      <Image source={{uri:profile}} style={styles.imageHandler}/>
+    </Pressable>
     </View>
   )
 }

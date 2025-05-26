@@ -48,8 +48,10 @@ const RegNo = () => {
           
         }}>
         <View style={{flex: 1}}>
-          <Text style={styles.headerText}>Hello</Text>
-          <Text style={styles.headerText2}>{user}</Text>
+          <View >
+            <Text style={styles.headerText}>Hello</Text>
+            <Text style={styles.headerText2}>{user}</Text>
+          </View>
         </View>
         <View
           style={{
@@ -134,13 +136,13 @@ const styles = StyleSheet.create({
       },
       headerText:{
         color: color.text,
-        fontFamily: fonts.md,
+        fontFamily: fonts.m,
         fontSize:16
       },
       headerText2:{
-        color: color.text,
-        fontFamily: fonts.l,
-        fontSize:40,
-        letterSpacing: 2
-      }
+        color: color.primary,
+        fontFamily: fonts.m,
+        fontSize:30,
+        marginTop: -7
+      },
 })

@@ -12,6 +12,7 @@ import {useAuthStore} from './data/authStore';
 import RegNo from './screens/RegNo';
 import TabNavigator from './screens/TabNavigator';
 import Grade from './screens/Grade';
+import Profile from './screens/Profile';
 
 const Stack = createNativeStackNavigator();
 
@@ -35,6 +36,8 @@ const RootStack = ({prop}) => {
       <Stack.Screen component={RegNo} name="RegNo" />
       <Stack.Screen component={TabNavigator} name="TabNavigator" />
       <Stack.Screen component={Grade} name="Grade" />
+      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="Home" component={Home} />
     </Stack.Navigator>
   );
 };
