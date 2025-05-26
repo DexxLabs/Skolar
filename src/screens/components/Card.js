@@ -60,7 +60,7 @@ const Card = ({attendance, name, regno, total, value, branch}) => {
         {showProgress && (
           <CircularProgress
             value={value}
-            radius={height/12}
+            radius={height/12.5}
             duration={1500}
             progressValueColor="white"
             progressValueFontSize={18}
@@ -70,8 +70,8 @@ const Card = ({attendance, name, regno, total, value, branch}) => {
             inActiveStrokeOpacity={0.1}
             maxValue={100}
             activeStrokeColor={zone?color.primary:color.warn}
-            inActiveStrokeWidth={7}
-            activeStrokeWidth={7}
+            inActiveStrokeWidth={6}
+            activeStrokeWidth={6}
             progressFormatter={(value) => {
               'worklet';
                 

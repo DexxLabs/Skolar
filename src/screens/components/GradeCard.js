@@ -60,7 +60,7 @@ const GradeCard = ({name, regno,branch,cgpa}) => {
         {showProgress && (
           <CircularProgress
             value={cgpa}
-            radius={height/12}
+            radius={height/12.5}
             duration={1500}
             progressValueColor="white"
             progressValueFontSize={18}

@@ -16,7 +16,7 @@ const SemesterBox = ({year, focused}) => {
         flex:1,
         width: (width/2)-(padding*1.5)
       }}>
-      <Text style={{fontFamily: fonts.m, color: color.text,textAlign:'center'}}>{year}</Text>
+      <Text style={{fontFamily: fonts.m, color: color.text,textAlign:'center',fontSize:13}}>{year}</Text>
     </View>
   );
 };

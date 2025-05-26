@@ -126,30 +126,29 @@ const Grade = () => {
             </Text>
 
             <View style={styles.categoryWrapper}>
-              <FlatList
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                data={years}
-                keyExtractor={item => item.id.toString()}
-                contentContainerStyle={{
-                  flex: 1,
-                  justifyContent:'space-between',
-                  alignItems: 'center',
-                }}
-                renderItem={({item}) => (
-                  <Pressable
-                    onPress={() => {
-                      setSelectedId(item.id);
-                      if ((selectedSemId % 2) === 0) {
-                        setSelectedSemId(item.id * 2);
-                      } else {
-                        setSelectedSemId(item.id * 2 - 1);
-                      }
-                    }}>
-                    <YearBox year={item.year} focused={selectedId === item.id} />
-                  </Pressable>
-                )}
-              />
+            <FlatList
+  data={years}
+  keyExtractor={item => item.id.toString()}
+  numColumns={4}
+  scrollEnabled={false} // Keeps it static like your old row
+  columnWrapperStyle={{ flex: 1 }} // Ensures full row width
+  contentContainerStyle={{ marginTop: padding }}
+  renderItem={({ item }) => (
+    <Pressable
+      style={{ flex: 1 }}
+      onPress={() => {
+        setSelectedId(item.id);
+        setSelectedSemId((item.id - 1) * 2 + 1); // Maps id to 1,3,5,7
+      }}>
+      <YearBox year={item.year} focused={selectedId === item.id} />
+    </Pressable>
+  )}
+/>
+
+
+
+                  
+  
 
               <View style={{
                 marginTop: padding,
