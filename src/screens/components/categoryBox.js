@@ -1,6 +1,6 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {color} from '../../data/variables';
+import {color, padding} from '../../data/variables';
 import fonts from '../../data/fonts';
 
 const CategoryBox = ({name, focused}) => {
@@ -13,6 +13,8 @@ const CategoryBox = ({name, focused}) => {
         borderRadius: 12,
         padding: 12,
         marginRight: 6,
+        flex:1,
+        paddingHorizontal:padding*1.5
       }}>
       <Text style={{fontFamily: fonts.m, color: color.text}}>{name}</Text>
     </View>
