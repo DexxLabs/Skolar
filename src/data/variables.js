@@ -12,6 +12,8 @@ export const {height,width}=Dimensions.get('window')
 
 export const padding = 16
 
-export const user = 'Veer'
+export const user = 'Ranbeer'
+
+export const fullname = 'Ranbeer Singh'
 
 export const profile = 'https://i.pinimg.com/736x/ac/6b/13/ac6b1392be57602c482e0317acaa3f4a.jpg'

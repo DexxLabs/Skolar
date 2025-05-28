@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 import React, { useState } from 'react';
-import {color, height, padding, user, width} from '../data/variables';
+import {color, fullname, height, padding, user, width} from '../data/variables';
 import fonts from '../data/fonts';
 import {useAuthStore} from '../data/authStore';
 import Card from './components/Card';
@@ -111,7 +111,7 @@ const Home = () => {
         ListHeaderComponent={
           <>
             <Header />
-            <Card attendance={result.totalAttended} total={result.totalClasses} name={'Ranbeer'} regno={no} value={result.percentage} branch={'IT'}/>
+            <Card attendance={result.totalAttended} total={result.totalClasses} name={fullname} regno={no} value={result.percentage} branch={'IT'}/>
             <Text
               style={[
                 styles.desc,

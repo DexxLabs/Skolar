@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {color, height, padding, user, width} from '../data/variables';
+import {color, fullname, height, padding, user, width} from '../data/variables';
 import fonts from '../data/fonts';
 import {useAuthStore} from '../data/authStore';
 import Header from './components/Header';
@@ -18,6 +18,7 @@ import SemesterBox from './components/semesterBox';
 import {studentAcademicData} from '../data/fetchedData';
 import Snackbar from 'react-native-snackbar';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import SGPACard from './components/SGPACard';
 
 export const gradeToPercentage = grade => {
   switch (grade) {
@@ -116,7 +117,7 @@ const Grade = () => {
         ListHeaderComponent={
           <>
             <Header />
-            <GradeCard name={'Ranbeer'} regno={no} branch={'IT'} cgpa={8.34} />
+            <GradeCard name={fullname} regno={no} branch={'IT'} cgpa={8.34} />
             <Text style={[styles.desc, {
               fontFamily: fonts.m,
               fontSize: 22,
@@ -128,29 +129,23 @@ const Grade = () => {
 
             <View style={styles.categoryWrapper}>
             <FlatList
-  data={years}
-  keyExtractor={item => item.id.toString()}
-  numColumns={4}
-  scrollEnabled={false} 
-  columnWrapperStyle={{ flex: 1,gap:6 }} 
-  contentContainerStyle={{ marginTop: padding }}
-  renderItem={({ item }) => (
-    <Pressable
-      style={{ flex: 1 }}
-      onPress={() => {
-        setSelectedId(item.id);
-        setSelectedSemId((item.id - 1) * 2 + 1); 
-      }}>
-      <YearBox year={item.year} focused={selectedId === item.id} />
-    </Pressable>
+              data={years}
+              keyExtractor={item => item.id.toString()}
+              numColumns={4}
+              scrollEnabled={false} 
+              columnWrapperStyle={{ flex: 1,gap:6 }} 
+              contentContainerStyle={{ marginTop: padding }}
+              renderItem={({ item }) => (
+                <Pressable
+                  style={{ flex: 1 }}
+                  onPress={() => {
+                    setSelectedId(item.id);
+                    setSelectedSemId((item.id - 1) * 2 + 1); 
+                  }}>
+                <YearBox year={item.year} focused={selectedId === item.id} />
+                </Pressable>
   )}
 />
-
-
-
-                  
-  
-
               <View style={{
                 marginTop: padding,
                 flexDirection: 'row',
@@ -170,6 +165,8 @@ const Grade = () => {
                   />
                 </Pressable>
               </View>
+
+              <SGPACard cgpa={8.7} sgpa={8.5} semester={getSemesterLabel(selectedSemId)}/>
             </View>
           </>
         }

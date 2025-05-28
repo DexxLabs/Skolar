@@ -6,9 +6,9 @@ import fonts from '../../data/fonts';
 import * as Animatable from 'react-native-animatable';
 
 
-const Card = ({attendance, name, regno, total, value, branch}) => {
+const SGPACard = ({semester,cgpa,sgpa}) => {
   const [showProgress, setShowProgress] = useState(false);
-  const zone = value>=75.00
+
   useEffect(() => {
     const timeout = setTimeout(() => {
       setShowProgress(true);
@@ -20,37 +20,32 @@ const Card = ({attendance, name, regno, total, value, branch}) => {
   return (
     <Animatable.View animation='fadeIn' duration={500}
       style={{
+        
         borderColor: color.secondary,
         borderWidth: 2,
         borderRadius: 16,
-        marginTop: padding * 2,
+        marginTop:padding,
         flexDirection: 'row',
       }}>
       {/* Info section */}
-      <View style={{flex: 1, margin: padding,gap:8}}>
-        <Text style={[styles.desc, {fontFamily: fonts.m, fontSize: 22}]}>Dashboard</Text>
+      <View style={{flex: 1, margin: padding,gap:7}}>
+        <Text style={[styles.desc, {fontFamily: fonts.m, fontSize: 22}]}>{semester}</Text>
 
-        <View style={{flex: 1,gap:8}}>
+        <View style={{flex: 1,gap:7}}>
+
           <View style={{flexDirection: 'row'}}>
-            <Text style={styles.desc}>Name : </Text>
-            <Text style={[styles.desc, {fontFamily:fonts.m,color: color.primary}]}>{name}</Text>
+            <Text style={styles.desc}>SGPA : </Text>
+            <Text style={styles.desc}>{sgpa}</Text>
+            <Text style={[styles.desc, {color: color.primary}]}>/10</Text>
           </View>
 
           <View style={{flexDirection: 'row'}}>
-            <Text style={styles.desc}>Registration No : </Text>
-            <Text style={[styles.desc, {color: color.primary}]}>{regno}</Text>
+            <Text style={styles.desc}>CGPA (At this point) : </Text>
+            <Text style={styles.desc}>{cgpa}</Text>
+            <Text style={[styles.desc, {color: color.primary}]}>/10</Text>
           </View>
 
-          <View style={{flexDirection: 'row'}}>
-            <Text style={styles.desc}>Branch : </Text>
-            <Text style={[styles.desc, {color: color.primary}]}>{branch}</Text>
-          </View>
-
-          <View style={{flexDirection: 'row'}}>
-            <Text style={styles.desc}>Total Attendance : </Text>
-            <Text style={styles.desc}>{attendance}</Text>
-            <Text style={[styles.desc, {color: color.primary}]}>/{total}</Text>
-          </View>
+          
         </View>
       </View>
 
@@ -58,23 +53,22 @@ const Card = ({attendance, name, regno, total, value, branch}) => {
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         {showProgress && (
           <CircularProgress
-            value={value}
-            radius={height/12.5}
+            value={9.5}
+            radius={height/20}
             duration={1500}
             progressValueColor="white"
             progressValueFontSize={18}
             progressValueStyle={{fontFamily: fonts.m}}
-            valueSuffix={'%'}
-            inActiveStrokeColor={zone?color.primary:color.warn}
+            inActiveStrokeColor={color.primary}
             inActiveStrokeOpacity={0.1}
-            maxValue={100}
-            activeStrokeColor={zone?color.primary:color.warn}
-            inActiveStrokeWidth={6}
-            activeStrokeWidth={6}
+            maxValue={10}
+            activeStrokeColor={color.primary}
+            inActiveStrokeWidth={4}
+            activeStrokeWidth={4}
             progressFormatter={(value) => {
               'worklet';
                 
-              return value.toFixed(2); 
+              return value.toFixed(2); // 2 decimal places
             }}
           />
         )}
@@ -83,7 +77,7 @@ const Card = ({attendance, name, regno, total, value, branch}) => {
   );
 };
 
-export default Card;
+export default SGPACard;
 
 const styles = StyleSheet.create({
   desc: {

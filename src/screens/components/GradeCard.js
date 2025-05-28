@@ -20,7 +20,6 @@ const GradeCard = ({name, regno,branch,cgpa}) => {
   return (
     <Animatable.View animation='fadeIn' duration={500}
       style={{
-        height: height / 5,
         borderColor: color.secondary,
         borderWidth: 2,
         borderRadius: 16,
@@ -28,10 +27,10 @@ const GradeCard = ({name, regno,branch,cgpa}) => {
         flexDirection: 'row',
       }}>
       {/* Info section */}
-      <View style={{flex: 1, margin: padding}}>
+      <View style={{flex: 1, margin: padding,gap:8}}>
         <Text style={[styles.desc, {fontFamily: fonts.m, fontSize: 22}]}>Dashboard</Text>
 
-        <View style={{flex: 1, justifyContent: 'space-evenly'}}>
+        <View style={{flex: 1,gap:8}}>
           <View style={{flexDirection: 'row'}}>
             <Text style={styles.desc}>Name : </Text>
             <Text style={[styles.desc, {fontFamily:fonts.m,color: color.primary}]}>{name}</Text>
