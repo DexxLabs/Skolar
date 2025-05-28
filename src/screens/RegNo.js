@@ -11,7 +11,7 @@ import {
   import {color, height, padding, user, width} from '../data/variables';
   import fonts from '../data/fonts';
   import {useAuthStore} from '../data/authStore';
-import { useNavigation } from '@react-navigation/native';
+import { CommonActions, useNavigation } from '@react-navigation/native';
 import Snackbar from 'react-native-snackbar';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -28,7 +28,12 @@ const RegNo = () => {
                 fontFamily: fonts.md,
                 backgroundColor: color.secondary,
               });
-            navigation.navigate('TabNavigator')
+              navigation.dispatch(
+                CommonActions.reset({
+                  index: 0,
+                  routes: [{ name: 'TabNavigator' }],
+                })
+              );
         }
         else{
             Snackbar.show({
