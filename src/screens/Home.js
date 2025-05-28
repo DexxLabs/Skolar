@@ -101,7 +101,6 @@ const Home = () => {
         paddingTop: insets.top+padding/2,
         paddingHorizontal: padding,
       }}>
-      <StatusBar backgroundColor={color.background} translucent={true}/>
       <FlatList
         data={studentData.filter((subject)=>subject.id.includes(selectedId))}
         keyExtractor={item => item.id}
