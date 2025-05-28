@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
         color: color.primary,
         fontFamily: fonts.m,
         fontSize:30,
-        marginTop: -7
+        marginTop: -7,
+        marginLeft:-2
       },
       imageHandler:{
         height:38,
