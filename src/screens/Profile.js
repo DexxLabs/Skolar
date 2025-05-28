@@ -12,6 +12,7 @@ import {color, height, padding, profile, user, width} from '../data/variables';
 import fonts from '../data/fonts';
 import {useNavigation} from '@react-navigation/native';
 import { useAuthStore } from '../data/authStore';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const LetsGo = () => {
   const navigation = useNavigation();
@@ -19,15 +20,16 @@ const LetsGo = () => {
     const logout = useAuthStore.getState().logout;
     await logout();
   };
-  return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: color.background,
-        paddingTop: StatusBar.currentHeight,
-        paddingHorizontal: 12,
-        paddingVertical:10
-      }}>
+    const insets = useSafeAreaInsets()
+  
+    return (
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: color.background,
+          paddingTop: insets.top+padding/2,
+          paddingHorizontal: padding,
+        }}>
       <View style={{flex: 1}}>
         <TouchableOpacity
           onPress={() => {

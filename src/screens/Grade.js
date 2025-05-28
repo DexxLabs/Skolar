@@ -17,6 +17,7 @@ import YearBox from './components/yearBox';
 import SemesterBox from './components/semesterBox';
 import {studentAcademicData} from '../data/fetchedData';
 import Snackbar from 'react-native-snackbar';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export const gradeToPercentage = grade => {
   switch (grade) {
@@ -34,10 +35,10 @@ export const gradeToPercentage = grade => {
 };
 
 const years = [
-  {id: 1, year: '1st Year'},
-  {id: 2, year: '2nd Year'},
-  {id: 3, year: '3rd Year'},
-  {id: 4, year: '4th Year'},
+  {id: 1, year: 'First'},
+  {id: 2, year: 'Second'},
+  {id: 3, year: 'Third'},
+  {id: 4, year: 'Fourth'},
 ];
 
 function getSemesterLabel(n) {
@@ -79,7 +80,6 @@ const Grade = () => {
 
     const newSubjects = getSubjects(studentAcademicData, selectedId, selectedSemId);
     setSubjects(newSubjects);
-    console.log(subjects)
   }, [selectedId, selectedSemId]);
 
   const logout = async () => {
@@ -96,13 +96,14 @@ const Grade = () => {
       value={gradeToPercentage(item.grade)}
     />
   );
+  const insets = useSafeAreaInsets()
 
   return (
     <View
       style={{
         flex: 1,
         backgroundColor: color.background,
-        paddingTop: StatusBar.currentHeight + padding,
+        paddingTop: insets.top+padding/2,
         paddingHorizontal: padding,
       }}>
       <FlatList
@@ -130,15 +131,15 @@ const Grade = () => {
   data={years}
   keyExtractor={item => item.id.toString()}
   numColumns={4}
-  scrollEnabled={false} // Keeps it static like your old row
-  columnWrapperStyle={{ flex: 1 }} // Ensures full row width
+  scrollEnabled={false} 
+  columnWrapperStyle={{ flex: 1,gap:6 }} 
   contentContainerStyle={{ marginTop: padding }}
   renderItem={({ item }) => (
     <Pressable
       style={{ flex: 1 }}
       onPress={() => {
         setSelectedId(item.id);
-        setSelectedSemId((item.id - 1) * 2 + 1); // Maps id to 1,3,5,7
+        setSelectedSemId((item.id - 1) * 2 + 1); 
       }}>
       <YearBox year={item.year} focused={selectedId === item.id} />
     </Pressable>

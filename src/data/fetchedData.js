@@ -1,3 +1,7 @@
+
+
+
+
 export const dummySubjects = [
     { id: '1', subject: 'DAA', attendance: 22, total: 25 },
     { id: '2', subject: 'DM', attendance: 20, total: 30 },

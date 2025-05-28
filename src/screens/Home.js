@@ -15,6 +15,7 @@ import Header from './components/Header';
 import MiniCard from './components/MiniCard';
 import CategoryBox from './components/categoryBox';
 import { dummySubjects } from '../data/fetchedData';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 function processSubjects(subjects) {
   return subjects.map((subject) => {
@@ -90,15 +91,17 @@ const Home = () => {
     )
   };
 
+  const insets = useSafeAreaInsets()
+
   return (
     <View
       style={{
         flex: 1,
         backgroundColor: color.background,
-        paddingTop: StatusBar.currentHeight + padding,
+        paddingTop: insets.top+padding/2,
         paddingHorizontal: padding,
       }}>
-      
+      <StatusBar backgroundColor={color.background} translucent={true}/>
       <FlatList
         data={studentData.filter((subject)=>subject.id.includes(selectedId))}
         keyExtractor={item => item.id}

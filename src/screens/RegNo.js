@@ -13,6 +13,7 @@ import {
   import {useAuthStore} from '../data/authStore';
 import { useNavigation } from '@react-navigation/native';
 import Snackbar from 'react-native-snackbar';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const RegNo = () => {
     const [regno,setRegNoInput]=useState('')
@@ -38,15 +39,16 @@ const RegNo = () => {
               });
         }
     }
-    return (
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: color.background,
-          paddingTop: StatusBar.currentHeight + padding,
-          paddingHorizontal: padding,
-          
-        }}>
+  const insets = useSafeAreaInsets()
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: color.background,
+        paddingTop: insets.top+padding/2,
+        paddingHorizontal: padding,
+      }}>
         <View style={{flex: 1}}>
           <View >
             <Text style={styles.headerText}>Hello</Text>

@@ -1,4 +1,4 @@
-import {StatusBar, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StatusBar, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -13,6 +13,7 @@ import RegNo from './screens/RegNo';
 import TabNavigator from './screens/TabNavigator';
 import Grade from './screens/Grade';
 import Profile from './screens/Profile';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,7 +29,6 @@ const LoginStack = () => {
 };
 
 const RootStack = ({prop}) => {
-  console.log(prop)
   return (
     <Stack.Navigator
       initialRouteName={prop?'TabNavigator':'RegNo'}
@@ -68,11 +68,12 @@ const App = () => {
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: color.background }}>
+    <SafeAreaProvider style={{ flex: 1, backgroundColor: color.background }}>
+      <StatusBar backgroundColor={color.background}/>
       <NavigationContainer>
         {isLoggedIn ? <RootStack prop={isRegno} /> : <LoginStack />}
       </NavigationContainer>
-    </View>
+    </SafeAreaProvider>
   );
 };
 

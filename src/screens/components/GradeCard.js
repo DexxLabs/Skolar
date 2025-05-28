@@ -69,8 +69,8 @@ const GradeCard = ({name, regno,branch,cgpa}) => {
             inActiveStrokeOpacity={0.1}
             maxValue={10}
             activeStrokeColor={color.primary}
-            inActiveStrokeWidth={7}
-            activeStrokeWidth={7}
+            inActiveStrokeWidth={6}
+            activeStrokeWidth={6}
             progressFormatter={(value) => {
               'worklet';
                 

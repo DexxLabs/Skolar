@@ -12,9 +12,8 @@ const SemesterBox = ({year, focused}) => {
         backgroundColor: focused ? color.primary : color.background,
         borderRadius: 12,
         padding: 12,
-        marginRight: 6,
         flex:1,
-        width: (width/2)-(padding*1.5)
+        width: (width/2)-(padding*1.2)
       }}>
       <Text style={{fontFamily: fonts.m, color: color.text,textAlign:'center',fontSize:13}}>{year}</Text>
     </View>

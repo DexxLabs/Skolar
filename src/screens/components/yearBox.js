@@ -11,17 +11,16 @@ const YearBox = ({ year, focused }) => {
         borderWidth: focused ? 0 : 1,
         backgroundColor: focused ? color.primary : color.background,
         borderRadius: 12,
-        padding: width / 30,
-        marginHorizontal: 4,
-        flex: 1, // take available space
-        height : height/20
+        flex: 1,
+        padding:12,
+        justifyContent:'center',
+        alignItems:'center'
       }}>
       <Text
         style={{
           fontFamily: fonts.m,
           color: color.text,
-          textAlign: 'center',
-          fontSize:13
+          
         }}>
         {year}
       </Text>
