@@ -12,7 +12,7 @@ export const {height,width}=Dimensions.get('window')
 
 export const padding = 16
 
-export const user = 'Ranbeer'
+export const user = 'Veer'
 
 export const fullname = 'Ranbeer Singh'
 

@@ -16,11 +16,15 @@ import Snackbar from 'react-native-snackbar';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const RegNo = () => {
-    const [regno,setRegNoInput]=useState('')
-    const navigation= useNavigation()
-    const setRegno = useAuthStore.getState().setRegno
+  const [regno,setRegNoInput]=useState('')
+  const navigation= useNavigation()
+  const setRegno = useAuthStore.getState().setRegno
+  const insets = useSafeAreaInsets()
+  
+
+  //fetch function for searching the registration no
     const fetch = async ()=> {
-        if (regno=='2302081077'){    //--- to be replaced with real database query
+        if (regno=='12'){    //--- to be replaced with real database query
             await setRegno(regno);
             Snackbar.show({
                 text: 'Registration Number Verified Successfully',
@@ -44,7 +48,6 @@ const RegNo = () => {
               });
         }
     }
-  const insets = useSafeAreaInsets()
 
   return (
     <View
@@ -89,7 +92,7 @@ const RegNo = () => {
     );
   };
 
-export default RegNo
+export default RegNo;
 
 const styles = StyleSheet.create({
     box: {

@@ -1,7 +1,6 @@
 import {
   FlatList,
   Pressable,
-  StatusBar,
   StyleSheet,
   Text,
   View,
@@ -19,8 +18,12 @@ import {studentAcademicData} from '../data/fetchedData';
 import Snackbar from 'react-native-snackbar';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import SGPACard from './components/SGPACard';
+import * as Animatable from 'react-native-animatable';
 
-export const gradeToPercentage = grade => {
+
+
+//for circular indicator inside grade card mini
+const gradeToPercentage = grade => {
   switch (grade) {
     case 'O': return 100;
     case 'A+': return 85;
@@ -35,6 +38,7 @@ export const gradeToPercentage = grade => {
   }
 };
 
+//data for year flatlist
 const years = [
   {id: 1, year: 'First'},
   {id: 2, year: 'Second'},
@@ -55,41 +59,70 @@ function getSemesterLabel(n) {
   return `${n}${suffix(n)} Semester`;
 }
 
+const getSGPAandCGPA = (semesterId) => {
+  for (const year of studentAcademicData) {
+    const semester = year.semesters.find((s) => s.id === String(semesterId));
+    if (semester) {
+      return {
+        sgpa: semester.sgpa,
+        cgpa: semester.cgpa,
+      };
+    }
+  }
+  return { sgpa: null, cgpa: null };
+};
+
 const Grade = () => {
   const [selectedId, setSelectedId] = useState(1);
   const [selectedSemId, setSelectedSemId] = useState(1);
   const [subjects, setSubjects] = useState([]);
+  const [loadingSubjects, setLoadingSubjects] = useState(true);
 
-  useEffect(() => {
-    const getSubjects = (data, selectedYearId, selectedSemId) => {
-      const year = data.find(y => parseInt(y.id) === selectedYearId);
-      if (!year){Snackbar.show({
-        text: 'Nothing to see here!!',
-        duration: Snackbar.LENGTH_SHORT,
-        fontFamily: fonts.m,
-        backgroundColor: color.secondary,
-      });return [];}
-      const semester = year.semesters.find(s => parseInt(s.id) === selectedSemId);
-      if (!semester){Snackbar.show({
-        text: 'Nothing to see here!!',
-        duration: Snackbar.LENGTH_SHORT,
-        fontFamily: fonts.m,
-        backgroundColor: color.secondary,
-      });return [];}
-      return semester.subjects;
-    };
-
-    const newSubjects = getSubjects(studentAcademicData, selectedId, selectedSemId);
-    setSubjects(newSubjects);
-  }, [selectedId, selectedSemId]);
-
-  const logout = async () => {
-    const logout = useAuthStore.getState().logout;
-    await logout();
-  };
-
+  //constants
+  const insets = useSafeAreaInsets()
+  const semesterData = getSGPAandCGPA(selectedSemId)
   const no = useAuthStore(state => state.regno);
 
+  const getSubjects = (data, selectedYearId, selectedSemId) => {
+    const year = data.find(y => parseInt(y.id) === selectedYearId);
+    if (!year) {
+      Snackbar.show({
+        text: 'Nothing to see here!!',
+        duration: Snackbar.LENGTH_SHORT,
+        fontFamily: fonts.m,
+        backgroundColor: color.secondary,
+      });
+      return [];
+    }
+  
+    const semester = year.semesters.find(s => parseInt(s.id) === selectedSemId);
+    if (!semester) {
+      Snackbar.show({
+        text: 'Nothing to see here!!',
+        duration: Snackbar.LENGTH_SHORT,
+        fontFamily: fonts.m,
+        backgroundColor: color.secondary,
+      });
+      return [];
+    }
+  
+    return semester.subjects || [];
+  };
+  
+  
+
+
+useEffect(() => {
+  setLoadingSubjects(true);
+  setTimeout(() => {
+    const newSubjects = getSubjects(studentAcademicData, selectedId, selectedSemId);
+    setSubjects(newSubjects);
+    setLoadingSubjects(false);
+  }, 50); // slight delay smooths transitions
+}, [selectedId, selectedSemId]);
+
+
+  //component for each subject card
   const renderMiniCard = ({item}) => (
     <GradeCardMini
       subject={item.name}
@@ -97,7 +130,7 @@ const Grade = () => {
       value={gradeToPercentage(item.grade)}
     />
   );
-  const insets = useSafeAreaInsets()
+
 
   return (
     <View
@@ -108,16 +141,17 @@ const Grade = () => {
         paddingHorizontal: padding,
       }}>
       <FlatList
-        data={subjects}
+        data={loadingSubjects ? [] : subjects}
         keyExtractor={item => item.id.toString()}
         renderItem={renderMiniCard}
         showsVerticalScrollIndicator={false}
         removeClippedSubviews={false}
         contentContainerStyle={{paddingBottom:height/6}}
         ListHeaderComponent={
+          //header component till year and sgpa card
           <>
             <Header />
-            <GradeCard name={fullname} regno={no} branch={'IT'} cgpa={8.34} />
+            <GradeCard name={fullname} regno={no} branch={'IT'} cgpa={9.34}/>
             <Text style={[styles.desc, {
               fontFamily: fonts.m,
               fontSize: 22,
@@ -126,6 +160,7 @@ const Grade = () => {
             }]}>
               Year
             </Text>
+              {/*Year Button & Sem Buttom*/}
 
             <View style={styles.categoryWrapper}>
             <FlatList
@@ -146,6 +181,8 @@ const Grade = () => {
                 </Pressable>
   )}
 />
+              {/*Semester Button */}
+
               <View style={{
                 marginTop: padding,
                 flexDirection: 'row',
@@ -166,7 +203,32 @@ const Grade = () => {
                 </Pressable>
               </View>
 
-              <SGPACard cgpa={8.7} sgpa={8.5} semester={getSemesterLabel(selectedSemId)}/>
+              {/*SGPA Card or Result not found */}
+              {
+  (semesterData?.sgpa != null || semesterData?.cgpa != null)
+    ? (
+        <SGPACard
+          semester={getSemesterLabel(selectedSemId)}
+          cgpa={semesterData.cgpa}
+          sgpa={semesterData.sgpa}
+        />
+      )
+    : (
+        <Animatable.View
+          animation="fadeIn"
+          duration={500}
+          style={{ padding: padding, alignItems: 'center' }}
+        >
+          <Text style={[styles.desc, {
+            fontFamily: fonts.s,
+            fontSize: 16,
+            color: color.text,
+          }]}>
+            Results not available yet!
+          </Text>
+        </Animatable.View>
+      )
+}
             </View>
           </>
         }

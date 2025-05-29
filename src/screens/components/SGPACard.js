@@ -1,79 +1,80 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {color, height, padding} from '../../data/variables';
 import CircularProgress from 'react-native-circular-progress-indicator';
 import fonts from '../../data/fonts';
 import * as Animatable from 'react-native-animatable';
+import Snackbar from 'react-native-snackbar';
 
 
-const SGPACard = ({semester,cgpa,sgpa}) => {
+const SGPACard = ({ semester, cgpa, sgpa }) => {
   const [showProgress, setShowProgress] = useState(false);
+  const animRef = useRef(null);
 
   useEffect(() => {
+    setShowProgress(false); // reset progress
     const timeout = setTimeout(() => {
       setShowProgress(true);
-    }, 100); // wait for layout pass
-
+    }, 100);
+    animRef.current?.fadeIn(100);
+    
     return () => clearTimeout(timeout);
-  }, []);
-
+  }, [semester, cgpa, sgpa]); // watch for prop changes
   return (
-    <Animatable.View animation='fadeIn' duration={500}
+    <Animatable.View
+      ref={animRef}
       style={{
-        
         borderColor: color.secondary,
         borderWidth: 2,
         borderRadius: 16,
-        marginTop:padding,
+        marginTop: padding,
         flexDirection: 'row',
-      }}>
+      }}
+    >
       {/* Info section */}
-      <View style={{flex: 1, margin: padding,gap:7}}>
-        <Text style={[styles.desc, {fontFamily: fonts.m, fontSize: 22}]}>{semester}</Text>
+      <View style={{ flex: 1, margin: padding, gap: 7 }}>
+        <Text style={[styles.desc, { fontFamily: fonts.m, fontSize: 18 }]}>{semester}</Text>
 
-        <View style={{flex: 1,gap:7}}>
-
-          <View style={{flexDirection: 'row'}}>
+        <View style={{ flex: 1, gap: 7 }}>
+          <View style={{ flexDirection: 'row' }}>
             <Text style={styles.desc}>SGPA : </Text>
             <Text style={styles.desc}>{sgpa}</Text>
-            <Text style={[styles.desc, {color: color.primary}]}>/10</Text>
+            <Text style={[styles.desc, { color: color.primary }]}>/10</Text>
           </View>
 
-          <View style={{flexDirection: 'row'}}>
-            <Text style={styles.desc}>CGPA (At this point) : </Text>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={styles.desc}>CGPA (At that point) : </Text>
             <Text style={styles.desc}>{cgpa}</Text>
-            <Text style={[styles.desc, {color: color.primary}]}>/10</Text>
+            <Text style={[styles.desc, { color: color.primary }]}>/10</Text>
           </View>
-
-          
         </View>
       </View>
 
       {/* Circular Progress */}
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         {showProgress && (
           <CircularProgress
-            value={9.5}
-            radius={height/20}
+            value={parseFloat(sgpa)} // Optional: make value dynamic
+            radius={height / 20}
             duration={1500}
             progressValueColor="white"
             progressValueFontSize={18}
-            progressValueStyle={{fontFamily: fonts.m}}
+            progressValueStyle={{ fontFamily: fonts.m }}
             inActiveStrokeColor={color.primary}
             inActiveStrokeOpacity={0.1}
             maxValue={10}
             activeStrokeColor={color.primary}
-            inActiveStrokeWidth={4}
-            activeStrokeWidth={4}
+            inActiveStrokeWidth={5}
+            activeStrokeWidth={5}
             progressFormatter={(value) => {
               'worklet';
-                
-              return value.toFixed(2); // 2 decimal places
+              return value.toFixed(2);
             }}
           />
         )}
       </View>
     </Animatable.View>
+    
   );
 };
 

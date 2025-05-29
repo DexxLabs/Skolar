@@ -6,7 +6,7 @@ export const dummySubjects = [
     { id: '1', subject: 'DAA', attendance: 22, total: 25 },
     { id: '2', subject: 'DM', attendance: 20, total: 30 },
     { id: '3', subject: 'EM', attendance: 50, total: 50 },
-    { id: '4', subject: 'Ch', attendance: 60, total: 70 },
+    { id: '4', subject: 'CH', attendance: 60, total: 70 },
     { id: '5', subject: 'CS', attendance: 75, total: 100 },
     { id: '6', subject: 'OS', attendance: 75, total: 100 },
   ];
@@ -19,6 +19,8 @@ export const dummySubjects = [
         {
           id: '1',
           name: 'Semester 1',
+          sgpa: 8.2,
+          cgpa: 8.2,
           subjects: [
             { id: '1', name: 'Mathematics I', grade: 'A+' },
             { id: '2', name: 'Physics', grade: 'A' },
@@ -30,6 +32,8 @@ export const dummySubjects = [
         {
           id: '2',
           name: 'Semester 2',
+          sgpa: 8.5,
+          cgpa: 8.35,
           subjects: [
             { id: '6', name: 'Mathematics II', grade: 'B' },
             { id: '7', name: 'Electrical Engg.', grade: 'B+' },
@@ -47,6 +51,8 @@ export const dummySubjects = [
         {
           id: '3',
           name: 'Semester 3',
+          sgpa: 8.7,
+          cgpa: 8.47,
           subjects: [
             { id: '11', name: 'Data Structures', grade: 'F' },
             { id: '12', name: 'Discrete Maths', grade: 'B+' },
@@ -58,6 +64,8 @@ export const dummySubjects = [
         {
           id: '4',
           name: 'Semester 4',
+          sgpa: 9.0,
+          cgpa: 8.6,
           subjects: [
             { id: '16', name: 'Operating Systems', grade: 'A' },
             { id: '17', name: 'DBMS', grade: 'A+' },
@@ -75,6 +83,8 @@ export const dummySubjects = [
         {
           id: '5',
           name: 'Semester 5',
+          sgpa: 8.9,
+          cgpa: 8.66,
           subjects: [
             { id: '21', name: 'AI & ML', grade: 'A' },
             { id: '22', name: 'Web Development', grade: 'O' },
@@ -87,6 +97,8 @@ export const dummySubjects = [
         {
           id: '6',
           name: 'Semester 6',
+          sgpa: 9.1,
+          cgpa: 8.73,
           subjects: [
             { id: '26', name: 'Mobile App Dev', grade: 'A' },
             { id: '27', name: 'Data Science', grade: 'O' },
@@ -104,6 +116,8 @@ export const dummySubjects = [
         {
           id: '7',
           name: 'Semester 7',
+          sgpa: 9.3,
+          cgpa: 8.81,
           subjects: [
             { id: '31', name: 'Cloud Computing', grade: 'A+' },
             { id: '32', name: 'Big Data Analytics', grade: 'A' },
@@ -115,6 +129,8 @@ export const dummySubjects = [
         {
           id: '8',
           name: 'Semester 8',
+          sgpa: 9.5,
+          cgpa: 8.9,
           subjects: [
             { id: '36', name: 'Comprehensive Viva', grade: 'O' },
             { id: '37', name: 'Final Project', grade: 'O' },
@@ -125,4 +141,5 @@ export const dummySubjects = [
       ]
     }
   ];
+  
   
