@@ -19,34 +19,54 @@ const Login = () => {
 
   //login function
   const login = async () => {
-    if (email == '' || password == '') {
-      Snackbar.show({
+    if (email === '' || password === '') {
+      return Snackbar.show({
         text: 'Field cannot be empty',
         duration: Snackbar.LENGTH_SHORT,
         fontFamily: fonts.md,
         backgroundColor: color.secondary,
       });
     }
-
-    // Mock login — replace with real API call
-    if (email === 'test' && password === '1234') {
-      const login = useAuthStore.getState().login;
-      await login('your_token_here');
-      Snackbar.show({
-        text: 'Logged In Successully',
-        duration: Snackbar.LENGTH_SHORT,
-        fontFamily: fonts.md,
-        backgroundColor: color.secondary,
+  
+    try {
+      const response = await fetch('http://192.168.65.100:3001/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
       });
-    } else {
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        const login = useAuthStore.getState().login;
+        await login(data.token); // store token in global state or secure storage
+        Snackbar.show({
+          text: 'Logged In Successfully',
+          duration: Snackbar.LENGTH_SHORT,
+          fontFamily: fonts.md,
+          backgroundColor: color.secondary,
+        });
+      } else {
+        Snackbar.show({
+          text: data.error || 'Invalid credentials',
+          duration: Snackbar.LENGTH_SHORT,
+          fontFamily: fonts.md,
+          backgroundColor: color.secondary,
+        });
+      }
+    } catch (error) {
+      console.error('Login error:', error);
       Snackbar.show({
-        text: 'Invalid Credentials',
+        text: 'Something went wrong',
         duration: Snackbar.LENGTH_SHORT,
         fontFamily: fonts.md,
         backgroundColor: color.secondary,
       });
     }
   };
+  
   return (
     <View style={styles.container}>
       <View style={styles.box}>
