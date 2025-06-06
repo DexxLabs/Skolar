@@ -10,14 +10,14 @@ import {
 import React, {useState} from 'react';
 import {color} from '../data/variables';
 import fonts from '../data/fonts';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import Snackbar from 'react-native-snackbar';
 import {useAuthStore} from '../data/authStore';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  //login function
   const login = async () => {
     if (email == '' || password == '') {
       Snackbar.show({
@@ -65,7 +65,7 @@ const Login = () => {
           style={styles.input}
           secureTextEntry
         />
-
+        {/* login button */}
         <TouchableOpacity onPress={() => login()} style={styles.loginButton}>
           <Text style={styles.loginButtonText}>LOGIN</Text>
         </TouchableOpacity>
