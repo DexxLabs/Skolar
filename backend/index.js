@@ -1,6 +1,3 @@
-console.log('GOOGLE_CLIENT_ID:', process.env.GOOGLE_CLIENT_ID);
-console.log('JWT_SECRET:', process.env.JWT_SECRET ? 'Loaded' : 'Not loaded');
-
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
