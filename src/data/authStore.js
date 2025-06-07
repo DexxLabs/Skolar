@@ -3,8 +3,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const useAuthStore = create((set) => ({
   isLoggedIn: false,
-  isRegno:false,
-  regno:'',
+  isRegno: false,
+  regno: '',
+  userData: null,
 
   login: async (token) => {
     await AsyncStorage.setItem('token', token);
@@ -13,9 +14,9 @@ export const useAuthStore = create((set) => ({
 
   logout: async () => {
     await AsyncStorage.removeItem('token');
-    set({ isLoggedIn: false });
-    set({ regno: '' });
-    set({ isRegno: false });
+    await AsyncStorage.removeItem('userData');
+    await AsyncStorage.removeItem('regno');
+    set({ isLoggedIn: false, isRegno: false, regno: '', userData: null });
   },
 
   checkAuth: async () => {
@@ -23,33 +24,41 @@ export const useAuthStore = create((set) => ({
     set({ isLoggedIn: !!token });
   },
 
-  checkRegno: async () => {
-    const no = await AsyncStorage.getItem('regno');
-    set({isRegno: !!no});
-    set({regno:no})
-
-  },
-
   setRegno: async (reg) => {
     await AsyncStorage.setItem('regno', reg);
-    set({isRegno: true})
-    set({regno : reg})
+    set({ isRegno: true, regno: reg });
   },
 
   fetchRegno: async () => {
-    const no = await AsyncStorage.getItem('regno')
-    set({regno:no})
+    const no = await AsyncStorage.getItem('regno');
+    set({ regno: no });
   },
 
-  hydrate: async () => {
-    const token = await AsyncStorage.getItem('token');
-    const regno = await AsyncStorage.getItem('regno');
-  
+  setUserData: async (data) => {
+    try {
+      set({ userData: data });
+      await AsyncStorage.setItem('userData', JSON.stringify(data));
+    } catch (error) {
+      console.error('Failed to set user data:', error);
+    }
+  },
+
+  // Unified hydrate: loads token, regno, and userData together
+hydrate: async () => {
+  try {
+    const values = await AsyncStorage.multiGet(['token', 'regno', 'userData']);
+    const token = values[0][1];
+    const regno = values[1][1];
+    const userData = values[2][1];
+
     set({
       isLoggedIn: !!token,
       isRegno: !!regno,
       regno,
+      userData: userData ? JSON.parse(userData) : null,
     });
+  } catch (e) {
+    console.error('Hydration error:', e);
   }
+},
 }));
-

@@ -50,7 +50,7 @@ const App = () => {
 
   useEffect(() => {
     const init = async () => {
-      await hydrate();
+      hydrate();
       setIsAppReady(true);
     };
     init();

@@ -57,10 +57,9 @@ const RegNo = () => {
         paddingTop: insets.top+padding/2,
         paddingHorizontal: padding,
       }}>
-        <View style={{flex: 1}}>
+        <View style={{flex: 1,alignItems:'center'}}>
           <View >
-            <Text style={styles.headerText}>Hello</Text>
-            <Text style={styles.headerText2}>{user}</Text>
+            <Text style={styles.headerText2}>Skolar</Text>
           </View>
         </View>
         <View
@@ -101,7 +100,7 @@ const styles = StyleSheet.create({
         borderColor: color.secondary,
         borderWidth: 2,
         borderRadius: 12,
-        transform: [{translateY: -StatusBar.currentHeight}],
+        transform: [{translateY: -StatusBar.currentHeight}]
       },
       label: {
         fontSize: 14,
@@ -151,8 +150,7 @@ const styles = StyleSheet.create({
       },
       headerText2:{
         color: color.primary,
-        fontFamily: fonts.m,
-        fontSize:30,
-        marginTop: -7
+        fontFamily: 'futura medium bt',
+        fontSize:25,
       },
 })

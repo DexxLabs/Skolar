@@ -16,6 +16,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const LetsGo = () => {
   const navigation = useNavigation();
+  const userData = useAuthStore(state => state.userData);
+  
   const logout = async () => {
     const logout = useAuthStore.getState().logout;
     await logout();
@@ -54,11 +56,11 @@ const LetsGo = () => {
             }}>
             <Image
               source={{
-                uri: profile,
+                uri: userData?.profilePic || 'https://i.pinimg.com/736x/ac/6b/13/ac6b1392be57602c482e0317acaa3f4a.jpg'
               }}
               style={styles.imageHandler}
             />
-            <Text style={styles.headerText2}>{user}</Text>
+            <Text style={styles.headerText2}>{userData?.givenName || 'Guest'}</Text>
 
             <View
               style={{

@@ -1,5 +1,6 @@
 import { Dimensions } from "react-native";
 
+
 export const color = {
   background: '#0A0A0A',
   primary: '#22b455',
@@ -12,7 +13,7 @@ export const {height,width}=Dimensions.get('window')
 
 export const padding = 16
 
-export const user = 'Veer'
+
 
 export const fullname = 'Ranbeer Singh'
 

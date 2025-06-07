@@ -77,3 +77,9 @@ yarn-error.log
 # Gradle.properties
 android/gradle.properties
 
+#google-services.json
+android/app/google-services.json
+
+#.env
+.env
+

@@ -4,6 +4,9 @@ const dotenv = require('dotenv');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { PrismaClient } = require('@prisma/client');
+const { OAuth2Client } = require('google-auth-library');
+
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 dotenv.config();
 const app = express();
@@ -50,6 +53,83 @@ app.post('/auth/login', async (req, res) => {
       res.status(500).json({ error: 'Server error' });
     }
   });
+
+  app.post('/auth/google', async (req, res) => {
+    const { token } = req.body;
+  
+    try {
+      const ticket = await client.verifyIdToken({
+        idToken: token,
+        audience: process.env.GOOGLE_CLIENT_ID,
+      });
+  
+      const payload = ticket.getPayload();
+  
+      const {
+        email,
+        sub: googleId,
+        name,
+        picture: profilePic,
+        locale,
+        given_name: givenName,
+        family_name: familyName,
+      } = payload;
+  
+      let user = await prisma.user.findUnique({ where: { email } });
+  
+      if (!user) {
+        user = await prisma.user.create({
+          data: {
+            email,
+            googleId,
+            name,
+            profilePic,
+            locale,
+            givenName,
+            familyName,
+          },
+        });
+      } else if (!user.googleId) {
+        // Update existing user with Google info if missing
+        user = await prisma.user.update({
+          where: { email },
+          data: {
+            googleId,
+            name: user.name || name,
+            profilePic: user.profilePic || profilePic,
+            locale: user.locale || locale,
+            givenName: user.givenName || givenName,
+            familyName: user.familyName || familyName,
+          },
+        });
+      }
+  
+      const jwtToken = jwt.sign(
+        { id: user.id, email: user.email },
+        process.env.JWT_SECRET,
+        { expiresIn: '7d' }
+      );
+  
+      res.json({
+        token: jwtToken,
+        user: {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          profilePic: user.profilePic,
+          locale: user.locale,
+          givenName: user.givenName,
+          familyName: user.familyName,
+        },
+      });
+
+      
+    } catch (err) {
+      console.error(err);
+      res.status(401).json({ error: 'Invalid Google token' });
+    }
+  });
+  
   
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
