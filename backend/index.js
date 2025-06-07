@@ -1,3 +1,6 @@
+console.log('GOOGLE_CLIENT_ID:', process.env.GOOGLE_CLIENT_ID);
+console.log('JWT_SECRET:', process.env.JWT_SECRET ? 'Loaded' : 'Not loaded');
+
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
@@ -123,10 +126,10 @@ app.post('/auth/login', async (req, res) => {
         },
       });
 
-      
+
     } catch (err) {
       console.error(err);
-      res.status(401).json({ error: 'Invalid Google token' });
+      res.status(401).json({ error: 'Invalid Google Token' });
     }
   });
   

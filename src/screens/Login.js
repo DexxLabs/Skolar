@@ -40,7 +40,7 @@ const Login = () => {
     }
   
     try {
-      const response = await fetch('http://192.168.65.100:3001/auth/login', {
+      const response = await fetch('https://skolar.onrender.com/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -61,14 +61,14 @@ const Login = () => {
         });
       } else {
         Snackbar.show({
-          text: data.error || 'Invalid credentials',
+          text: data.error || 'Invalid Credentials',
           duration: Snackbar.LENGTH_SHORT,
           fontFamily: fonts.md,
           backgroundColor: color.secondary,
         });
       }
     } catch (error) {
-      console.error('Login error:', error);
+      console.error('Login Error:', error);
       Snackbar.show({
         text: 'Something went wrong',
         duration: Snackbar.LENGTH_SHORT,
@@ -97,7 +97,7 @@ const Login = () => {
 
     console.log("ID Token: ", idToken);
 
-    const response = await fetch('http://192.168.65.100:3001/auth/google', {
+    const response = await fetch('https://skolar.onrender.com/auth/google', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ token: idToken }),
