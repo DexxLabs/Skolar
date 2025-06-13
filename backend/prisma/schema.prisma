@@ -30,7 +30,7 @@ model Student {
   regNo       String       @id
   name        String
   branch      String
-  attendances Attendance[] @relation("StudentAttendance")
+  attendances Attendance[]
 }
 
 model Subject {
@@ -40,12 +40,13 @@ model Subject {
 }
 
 model Attendance {
-  id          String    @id @default(uuid())
-  student     Student   @relation("StudentAttendance", fields: [studentRegNo], references: [regNo])
+  id           String   @id @default(uuid())
+  student      Student  @relation(fields: [studentRegNo], references: [regNo])
   studentRegNo String
-  subject     Subject   @relation(fields: [subjectId], references: [id])
-  subjectId   String
-  attended    Int
-  total       Int
+  subject      Subject  @relation(fields: [subjectId], references: [id])
+  subjectId    String
+  attended     Int
+  total        Int
 }
+
 
