@@ -25,3 +25,27 @@ model User {
   familyName String?  // Last name
   createdAt DateTime @default(now())
 }
+
+model Student {
+  regNo       String       @id
+  name        String
+  branch      String
+  attendances Attendance[] @relation("StudentAttendance")
+}
+
+model Subject {
+  id          String       @id @default(uuid())
+  name        String
+  attendances Attendance[]
+}
+
+model Attendance {
+  id          String    @id @default(uuid())
+  student     Student   @relation("StudentAttendance", fields: [studentRegNo], references: [regNo])
+  studentRegNo String
+  subject     Subject   @relation(fields: [subjectId], references: [id])
+  subjectId   String
+  attended    Int
+  total       Int
+}
+

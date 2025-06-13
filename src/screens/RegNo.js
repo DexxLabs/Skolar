@@ -17,37 +17,90 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const RegNo = () => {
   const [regno,setRegNoInput]=useState('')
+  const [data,setData]=useState(null)
   const navigation= useNavigation()
   const setRegno = useAuthStore.getState().setRegno
   const insets = useSafeAreaInsets()
   
+  //Registration No Check function
+  const isRegNoValid = async (regNo) => {
+    if (!/^\d{10}$/.test(regNo)) {
+      Snackbar.show({
+        text: 'Registration Number must be 10 digits',
+        duration: Snackbar.LENGTH_SHORT,
+        fontFamily: fonts.md,
+        backgroundColor: color.secondary,
+      });
+      return false;
+    }
+  
+    try {
+      const res = await fetch(`https://skolar.onrender.com/student/${regNo}/check`);
+      if (!res.ok) throw new Error();
+      return true;
+    } catch {
+      Snackbar.show({
+        text: 'Invalid Registration Number',
+        duration: Snackbar.LENGTH_SHORT,
+        fontFamily: fonts.md,
+        backgroundColor: color.secondary,
+      });
+      return false;
+    }
+  };
+
+  //function to get attendance Data
+const getAttendanceByRegNo = async (regNo) => {
+  try {
+    const response = await fetch(`https://skolar.onrender.com/student/${regNo}/attendance`);
+    if (!response.ok) {
+      const errData = await response.json();
+      Snackbar.show({
+        text: errData.error || 'Failed to fetch attendance',
+        duration: Snackbar.LENGTH_SHORT,
+        fontFamily: fonts.md,
+        backgroundColor: color.secondary,
+      });
+      return null;
+    }
+    return await response.json();
+  } catch (err) {
+    console.error('Attendance fetch error:', err);
+    Snackbar.show({
+      text: 'Network error. Please try again later.',
+      duration: Snackbar.LENGTH_SHORT,
+      fontFamily: fonts.md,
+      backgroundColor: color.secondary,
+    });
+    return null;
+  }
+};
 
   //fetch function for searching the registration no
     const fetch = async ()=> {
-        if (regno=='12'){    //--- to be replaced with real database query
-            await setRegno(regno);
-            Snackbar.show({
-                text: 'Registration Number Verified Successfully',
-                duration: Snackbar.LENGTH_SHORT,
-                fontFamily: fonts.md,
-                backgroundColor: color.secondary,
-              });
+              if (isRegNoValid(regno)||regno===12){
+                setRegno(regno)
+                setData(await getAttendanceByRegNo(regno))
+              //After RegistrationNo is Verified
               navigation.dispatch(
                 CommonActions.reset({
                   index: 0,
                   routes: [{ name: 'TabNavigator' }],
                 })
               );
-        }
-        else{
+            }else{
             Snackbar.show({
                 text: 'Invalid Registration Number',
                 duration: Snackbar.LENGTH_SHORT,
                 fontFamily: fonts.md,
                 backgroundColor: color.secondary,
               });
+            }
         }
-    }
+    
+
+
+    
 
   return (
     <View

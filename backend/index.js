@@ -129,7 +129,53 @@ app.post('/auth/login', async (req, res) => {
       res.status(401).json({ error: 'Invalid Google Token' });
     }
   });
+
+
+  app.get('/student/:regNo/attendance', async (req, res) => {
+    const { regNo } = req.params;
   
+    try {
+      const student = await prisma.student.findUnique({
+        where: { regNo },
+        include: {
+          attendance: {
+            include: { subject: true },
+          },
+        },
+      });
+  
+      if (!student) {
+        return res.status(404).json({ error: 'Student not found' });
+      }
+  
+      const attendanceData = student.attendance.map(record => ({
+        subject: record.subject.name,
+        attended: record.attended,
+        total: record.total,
+        percentage: ((record.attended / record.total) * 100).toFixed(2),
+      }));
+  
+      res.json({
+        regNo: student.regNo,
+        name: student.name,
+        branch: student.branch,
+        attendance: attendanceData,
+      });
+  
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Failed to fetch attendance' });
+    }
+  });
+  
+//registration no check
+app.get('/student/:regNo/check', async (req, res) => {
+  const { regNo } = req.params;
+  const student = await prisma.student.findUnique({ where: { regNo } });
+  if (!student) return res.status(404).json({ error: 'Not found' });
+  res.json({ exists: true });
+});
+
   
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
