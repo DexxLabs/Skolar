@@ -27,20 +27,21 @@ jobs:
           
       - name: Commit changes
         run: |
-          git config --local user.email "mazipanneh@gmail.com"
-          git config --local user.name "mazipan"
+          git config --local user.email "ranbeersingh0520@gmail.com"
+          git config --local user.name "dexxlabs"
           git add -A
           
-          arr[0]="chore(bot): 😂 auto commit"
-          arr[1]="chore(bot): 😱 auto commit"
-          arr[2]="chore(bot): 👿 auto commit"
-          arr[3]="chore(bot): 💩 auto commit"
-          arr[4]="chore(bot): 🙏 auto commit"
-          arr[5]="chore(bot): 🙈 auto commit"
-          arr[6]="chore(bot): 🐐 auto commit"
-          arr[7]="chore(bot): 🤖 auto commit"
-          arr[8]="chore(bot): 🟩 auto commit"
-          arr[9]="chore(bot): 👻 auto commit"
+          arr[0] = "UX Improvements | Bug Fixes"
+          arr[1] = "New Screen Added | Performance Improvement"
+          arr[2] = "Updated Dependencies"
+          arr[3] = "UI Cleanup | Code Optimization"
+          arr[4] = "State Management Improvements"
+          arr[5] = "Navigation Flow Updated"
+          arr[6] = "Refactored Components"
+          arr[7] = "API Integration Updates"
+          arr[8] = "Improved Load Times"
+          arr[9] = "Removed Unused Code"
+
           
           rand=$[$RANDOM % ${#arr[@]}]
           
